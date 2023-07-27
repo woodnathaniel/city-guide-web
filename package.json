@@ -1,5 +1,5 @@
 {
-  "name": "web-sdk-examples",
+  "name": "city-guide-web",
   "private": true,
   "homepage": "https://api.tomtom.com/maps-sdk-for-web-v6",
   "version": "1.0.0",
@@ -9,8 +9,7 @@
     "build": "node scripts/copyToDist.js && node scripts/replacePlaceholders.js",
     "start": "live-server --open=dist"
   },
-  "author": "Tomtom",
-  "license": "SEE LICENSE IN LICENSE.TXT",
+  "author": "city-guide-web",
   "devDependencies": {
     "ncp": "2.0.0",
     "replace-in-file": "4.1.3",
