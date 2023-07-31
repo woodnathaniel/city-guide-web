@@ -643,7 +643,7 @@ body {
         left: 50%;
         transform: translate(-50%, -50%);     /* width: 376px; */
         visibility: hidden;
-        transition: 1s;
+        transition: 0.1s;
     }
     .tt-side-panel.active{
        top: 50%;
