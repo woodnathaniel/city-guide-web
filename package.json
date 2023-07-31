@@ -10,6 +10,7 @@
     "start": "live-server --open=dist"
   },
   "author": "Tomtom",
+  "license": "SEE LICENSE IN LICENSE.TXT",
   "devDependencies": {
     "ncp": "2.0.0",
     "replace-in-file": "4.1.3",
