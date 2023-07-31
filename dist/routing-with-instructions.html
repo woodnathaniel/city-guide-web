@@ -55,49 +55,40 @@
         }
     </style>
     <body>
- <div id='map' class='map-view'>
+<div>
+    <form id="hide" class='tt-side-panel js-form'>
+        <header class='tt-side-panel__header'>
+            <div class='input-wrapper'>
+                <div class='tt-icon icon-spacing -start'></div>
+                <div id='startSearchBox' class='tt-form-label searchbox'></div>
+            </div>
+            <div class='input-wrapper'>
+                <div class='tt-icon icon-spacing -finish'></div>
+                <div id='finishSearchBox' class='tt-form-label searchbox'></div>
+            </div>  
+        </header>
+        <div id="toggleBtn"><i class="fa-solid fa-circle-xmark fa-lg" id="close-icon"></i></div>
+    </form>
 
-            <!-- <div class="option-container">
-                <div class="search-icon"><i class="fa-solid fa-magnifying-glass"></i></div>
-                <div class="route-direction"></div>
-            </div> -->
-                <button id="toggleButton" class="btn" style="border: #4a90e2 solid 2px;">Toggle</button>
+   <div id='map' class='map-view'>
 
-    
-
-            <!-- <div id="myDiv" class="dashBoard">
-            </div> -->
-
-            <div class='tt-side-panel' hidden="hidden"></div>
-                <form class='tt-side-panel js-form'>
-                    <header class='tt-side-panel__header'>
-                        <div class='input-wrapper'>
-                            <div class='tt-icon icon-spacing -start'></div>
-                            <div id='startSearchBox' class='tt-form-label searchbox'></div>
+            <div hidden="hidden"></div>
+                <div class='tt-tabs' >
+                    <div id=" " class='tt-tabs__panel js-tabs' hidden="hidden">
+                        <div class='tt-results-list js-results' ></div>
+                        <div class='js-results-loader' hidden='hidden'>
+                            <div class='loader-center'><span class='loader'></span></div>
                         </div>
-                        <div class='input-wrapper'>
-                            <div class='tt-icon icon-spacing -finish'></div>
-                            <div id='finishSearchBox' class='tt-form-label searchbox'></div>
-                        </div>  
-                    </header>
-                    <div class='tt-tabs js-tabs'>
-                        <div class='tt-tabs__panel'>
-                            <div class='tt-results-list js-results' ></div>
-                            <div class='js-results-loader' hidden='hidden'>
-                                <div class='loader-center'><span class='loader'></span></div>
-                            </div>
-                            <div class='tt-tabs__placeholder js-results-placeholder -small'>
-                                To get instructions, please choose starting and destination points.
-                            </div>
+                        <div class='tt-tabs__placeholder js-results-placeholder -small'>
+                          
                         </div>
                     </div>
-                </form>
-                
+                </div>
                 
             
 
             <!--THE SEARCH UI-->
-            <div class='tt-side-panel-search'>
+            <div hidden="hidden" class='tt-side-panel-search'>
                 <header class='tt-side-panel__header-search'>
                 </header>
                 <div class='tt-tabs js-tabs' >
@@ -106,12 +97,15 @@
                         <div class='js-results-loader-search' hidden='hidden'>
                             <div class='loader-center'><span class='loader'></span></div>
                         </div>
-                        <div class='tt-tabs__placeholder js-results-placeholder-search'></div>
+                        <div class='tt-tabs__placeholder js-results-placeholder-search'>hey there</div>
                     </div>
                 </div>
+                <div  class="route-button" onclick="toggle()">
+                    <i id="route-direction" class="fa-solid fa-route"></i></div>
             </div>   
             <div  class='full-map'></div>
- </div>
+  </div>
+</div>
         <script src='https://api.tomtom.com/maps-sdk-for-web/cdn/6.x/6.23.0/maps/maps-web.min.js'></script>
         <script src='https://api.tomtom.com/maps-sdk-for-web/cdn/6.x/6.23.0/services/services-web.min.js'></script>
         <script src='https://api.tomtom.com/maps-sdk-for-web/cdn/plugins/SearchBox/3.2.0//SearchBox-web.js'></script>
@@ -131,6 +125,27 @@
         <script data-showable type='text/javascript' src='../assets/js/search/searchbox-enter-submit.js'></script>
 
         <script>
+       
+        function toggle(){
+            let blurElement = document.querySelector('#map');
+            blurElement.classList.toggle('activeBlur');
+            // blurElement.classList.toggle(activeBlur)
+            let routePop = document.querySelector('#hide');
+            routePop.classList.toggle('active');
+        }
+
+        
+            let toggleBtn = document.querySelector('#toggleBtn');
+            toggleBtn.addEventListener('click', function(){
+                let blurElement = document.querySelector('#map');
+                blurElement.classList.toggle('activeBlur');
+                // blurElement.classList.toggle(activeBlur)
+                let routePop = document.querySelector('#hide');
+                routePop.classList.toggle('active');
+            })
+
+
+
             //creating general map
             var map = tt.map({
                 key: 'GZ2CohvCdB2RplDFGwFCyCg8gWO0YSKQ',
@@ -379,12 +394,25 @@
 
 /// Our Search Functionalities 
 
-const scroll = document.querySelector('.tt-tabs__panel')
-if((scroll.innerHTML === '')){
-    scroll.style.overflowY = 'scroll'
-}
-        var infoHintSearch = new infoHint('info', 'bottom-center', 5000).addTo(document.getElementById('map'));
-        var errorHintSearch = new infoHint('error', 'bottom-center', 5000).addTo(document.getElementById('map'));
+
+
+const routeBtn = document.getElementById('route-direction');
+
+// let display = true;
+// routeBtn.addEventListener('click', function(){
+//     const div = document.getElementById('hide')
+//     if (display) {
+//       div.style.zIndex = '0';
+//       display =false
+//     } else {
+//       div.style.zIndex = '1';
+//       display = true
+//     }
+// });
+
+
+        var infoHintSearch = new InfoHint('info', 'bottom-center', 5000).addTo(document.getElementById('map'));
+        var errorHintSearch = new InfoHint('error', 'bottom-center', 5000).addTo(document.getElementById('map'));
 
 // Options for the fuzzySearch service
         var searchOptions = {

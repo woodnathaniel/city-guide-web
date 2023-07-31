@@ -211,14 +211,17 @@ var guidancePanel = (function() {
             });
         }
 
+
+        //Handle Instruction Click
         function handleInstructionClick(position) {
             map.flyTo({ center: [position.longitude, position.latitude], duration: 500 });
+            
         }
 
         function handleInstructionHover(type, event) {
             var selectedInstructionIndex = event.target.getAttribute('data-number');
             var selectedInstructionMarker = guidanceMarkers[selectedInstructionIndex];
-
+ 
             if (type === 'enter') {
                 selectedInstructionMarker.addTo(map);
                 selectedInstructionMarker.togglePopup();

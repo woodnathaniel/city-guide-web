@@ -8,6 +8,7 @@ function appendParentSelector(parentSelector, selector) {
  */
 function ResultsManager(resultsElementSelector) {
     this.resultsElement = document.querySelector(appendParentSelector(resultsElementSelector, '.js-results'));
+    this.jsTabs = document.querySelector(appendParentSelector(resultsElementSelector, '.js-tabs'));
     this.resultsPlaceholder =
         document.querySelector(appendParentSelector(resultsElementSelector, '.js-results-placeholder'));
     this.resultsLoader = document.querySelector(appendParentSelector(resultsElementSelector, '.js-results-loader'));
@@ -23,6 +24,7 @@ ResultsManager.prototype.loading = function() {
 ResultsManager.prototype.success = function() {
     this.resultsLoader.setAttribute('hidden', 'hidden');
     this.resultsElement.removeAttribute('hidden');
+    this.jsTabs.removeAttribute('hidden')
     // this.resultsElement.style.overflow = 'hidden';
     // this.resultsElement.style.overflowY = 'scroll';
   
@@ -44,6 +46,11 @@ ResultsManager.prototype.clear = function() {
     for (var i = 0; i < this.resultsElement.children.length; i++) {
         this.resultsElement.removeChild(this.resultsElement.children[i]);
     }
+
+    // if(this.resultsElement.innerText == ''){
+    //   this.jsTabs.setAttribute('hidden', 'hidden')
+    // }
+    
 };
 
 window.ResultsManager = window.ResultsManager || ResultsManager;
