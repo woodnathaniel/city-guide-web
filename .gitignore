@@ -1,1 +1,21 @@
 node_modules
+./assets/fonts
+
+
+div[class^="instructions-list-"] {
+    background-color: #f2f2f2;
+
+} //at line 3040 in index.css at line 101 in guidance-panel
+
+
+.instruction-wrapper {
+    display: flex;
+    # overflow: auto;
+    # flex-direction: row;
+}
+
+
+.tt-results-list__item:hover {
+            /* cursor: pointer; */
+            background-color: rga(255, 255, 255, 0.5);
+        }  // at line 2695 in index at line 69 at guidance-panel

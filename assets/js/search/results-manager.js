@@ -8,7 +8,9 @@ function appendParentSelector(parentSelector, selector) {
  */
 function ResultsManager(resultsElementSelector) {
     this.resultsElement = document.querySelector(appendParentSelector(resultsElementSelector, '.js-results'));
+    console.log(this.resultsElement);
     this.jsTabs = document.querySelector(appendParentSelector(resultsElementSelector, '.js-tabs'));
+    console.log(this.jsTabs);
     this.resultsPlaceholder =
         document.querySelector(appendParentSelector(resultsElementSelector, '.js-results-placeholder'));
     this.resultsLoader = document.querySelector(appendParentSelector(resultsElementSelector, '.js-results-loader'));
@@ -22,14 +24,17 @@ ResultsManager.prototype.loading = function() {
 };
 
 ResultsManager.prototype.success = function() {
+    let blurElement = document.querySelector('#map');
+    blurElement.classList.toggle('activeBlur');
+    // blurElement.classList.toggle(activeBlur)
+    let routePop = document.querySelector('#hide');
+    routePop.classList.toggle('active');
     this.resultsLoader.setAttribute('hidden', 'hidden');
     this.resultsElement.removeAttribute('hidden');
-    this.jsTabs.removeAttribute('hidden')
+    this.jsTabs.removeAttribute('hidden');
+   
     // this.resultsElement.style.overflow = 'hidden';
     // this.resultsElement.style.overflowY = 'scroll';
-  
-
-
 };
 
 ResultsManager.prototype.resultsNotFound = function() {
@@ -43,7 +48,7 @@ ResultsManager.prototype.append = function(element) {
 };
 
 ResultsManager.prototype.clear = function() {
-    for (var i = 0; i < this.resultsElement.children.length; i++) {
+    for (let i = 0; i < this.resultsElement.children.length; i++) {
         this.resultsElement.removeChild(this.resultsElement.children[i]);
     }
 

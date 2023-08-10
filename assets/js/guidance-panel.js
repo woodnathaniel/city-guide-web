@@ -73,6 +73,7 @@ var guidancePanel = (function() {
         instructionsContent.appendChild(instructionsWrapper);
         parentElement.appendChild(instructionsContent);
 
+        //InstructionGroup HTML
         function createInstructionsGroupHTML(groupIndex) {
             var instructionsListData = guidance.instructions.slice(instructionsData[groupIndex][0],
                 instructionsData[groupIndex][instructionsData[groupIndex].length - 1] + 1);
@@ -103,6 +104,7 @@ var guidancePanel = (function() {
             );
         }
 
+    //creating Single Instructions+
         function createSingleInstruction(instructions, groupIndex) {
             var instructionOverlayHTML = '<div class="instructions-overlay">';
 
@@ -114,6 +116,8 @@ var guidancePanel = (function() {
                 instructionOverlayHTML +=
                 '<div class="instruction ' +
                     (length ? 'with-distance' : '') + '" data-number="' + instructionNumber + '">' +
+                    //creating instruction warapper. In our css file(index.css), at line 3091, I've flex-direction
+                    //the div's content row.
                     '<div class="instruction-wrapper">' +
                         '<div class="icon-wrapper">' +
                             '<div class="tt-icon ' + (selectRightIcon(instruction) || '') + '"></div>' +
@@ -212,10 +216,17 @@ var guidancePanel = (function() {
         }
 
 
-        //Handle Instruction Click
+        /* Handle Instruction Click, we hide the general panel and all other components
+         on the map div to show the only the click div either at the top or bottom of the screen.
+        on it there is a cloce or move back button where we click to send us back to the 
+        general panel div and all other neccessary div hidden divs must also display */
         function handleInstructionClick(position) {
-            map.flyTo({ center: [position.longitude, position.latitude], duration: 500 });
+            const generalGuidancePanel = document.querySelector('#instruction-tab');
+            const sidePanelSearch = document.querySelector('#search');
+            generalGuidancePanel.classList.toggle('active')
+            sidePanelSearch.classList.toggle('active')
             
+            map.flyTo({ center: [position.longitude, position.latitude], duration: 500 });   
         }
 
         function handleInstructionHover(type, event) {

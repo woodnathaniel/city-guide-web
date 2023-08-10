@@ -19,6 +19,10 @@
 
 }
 
+#close-icon:hover{
+  cursor: pointer;
+}
+
 .btn{
   position: fixed;
   bottom: 20px;
@@ -54,7 +58,7 @@
   justify-content: center;
 }
 
-.popup{
+/* .popup{
   position: absolute;
   top: 150%;
   left: 50%;
@@ -71,7 +75,7 @@
   transform: translate(-50%, -50%) scale(1);
   transition: top 0ms ease-in-out 0ms, opacity  200ms ease-in 0ms, transform 200ms ease-in 0ms;
 
-}
+} */
 
 .tt-tabs{
   z-index: 1;
@@ -91,9 +95,12 @@
   justify-content: center;
   align-items: center;
   display: flex;
+  /* transition: 0.2s; */
 }
 .route-button:hover{
   cursor: pointer;
+  background-color: rgb(180, 184, 184);
+  /* transition: 0.2s; */
 }
 .activeBlur{
   user-select: none;

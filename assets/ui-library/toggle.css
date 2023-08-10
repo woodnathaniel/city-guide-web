@@ -1,5 +1,5 @@
 .tt-toggle{
-    display:none;
+    display: none;
 }
 .tt-toggle:checked + .tt-label{
     background-color:#000000;

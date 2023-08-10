@@ -72,8 +72,8 @@
 
    <div id='map' class='map-view'>
 
-            <div hidden="hidden"></div>
-                <div class='tt-tabs' >
+            <!-- <div hidden="hidden"></div>
+                <div id="instruction-tab" class='tt-tabs' >
                     <div id=" " class='tt-tabs__panel js-tabs' hidden="hidden">
                         <div class='tt-results-list js-results' ></div>
                         <div class='js-results-loader' hidden='hidden'>
@@ -83,15 +83,26 @@
                           
                         </div>
                     </div>
-                </div>
+                </div> -->
                 
+                <div hidden="hidden"></div>
+                <div id="instruction-tab" class='tt-tabs' >
+                    <div id=" " class='tt-tabs__panel js-tabs' hidden="hidden">
+                        <div class='tt-results-list js-results' ></div>
+                        <div class='js-results-loader' hidden='hidden'>
+                            <div class='loader-center'><span class='loader'></span></div>
+                        </div>
+                        <div class='tt-tabs__placeholder js-results-placeholder -small'>
+                        </div>
+                    </div>
+                </div>
             
 
             <!--THE SEARCH UI-->
-            <div hidden="hidden" class='tt-side-panel-search'>
+            <div id="search" class='tt-side-panel-search'>
                 <header class='tt-side-panel__header-search'>
                 </header>
-                <div class='tt-tabs js-tabs' >
+                <div class='tt-tabs js-tabs-search' >
                     <div class='tt-tabs__panel' hidden="hidden">
                         <div class='js-results-search' hidden='hidden'></div>
                         <div class='js-results-loader-search' hidden='hidden'>
@@ -132,6 +143,7 @@
             // blurElement.classList.toggle(activeBlur)
             let routePop = document.querySelector('#hide');
             routePop.classList.toggle('active');
+           
         }
 
         
