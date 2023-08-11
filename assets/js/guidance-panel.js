@@ -54,6 +54,7 @@ var guidancePanel = (function() {
         }
         var instructionsWrapper = document.createElement('div');
         var instructionsContent = document.createElement('div');
+        // instructionsContent.classList.add('guidance-panel-scroll')
         var parentElement = document.querySelector('.guidance-panel');
         var instructionsHeader = document.createElement('div');
 
@@ -69,6 +70,7 @@ var guidancePanel = (function() {
             resultItem.classList = 'tt-results-list__item';
             resultItem.innerHTML = createInstructionsGroupHTML(index);
             instructionsWrapper.appendChild(resultItem);
+
         });
         instructionsContent.appendChild(instructionsWrapper);
         parentElement.appendChild(instructionsContent);
@@ -95,6 +97,7 @@ var guidancePanel = (function() {
             );
         }
 
+        //Creating InstructionList
         function createInstructionsList(instructions, groupIndex) {
             console.log(instructions)
             return (
@@ -106,7 +109,7 @@ var guidancePanel = (function() {
 
     //creating Single Instructions+
         function createSingleInstruction(instructions, groupIndex) {
-            var instructionOverlayHTML = '<div class="instructions-overlay">';
+            let instructionOverlayHTML = '<div class="instructions-overlay">';
 
             instructions.forEach(function(instruction, index) {
                 var instructionNumber = instructionsData[groupIndex][index];
@@ -221,10 +224,10 @@ var guidancePanel = (function() {
         on it there is a cloce or move back button where we click to send us back to the 
         general panel div and all other neccessary div hidden divs must also display */
         function handleInstructionClick(position) {
-            const generalGuidancePanel = document.querySelector('#instruction-tab');
-            const sidePanelSearch = document.querySelector('#search');
-            generalGuidancePanel.classList.toggle('active')
-            sidePanelSearch.classList.toggle('active')
+            // const generalGuidancePanel = document.querySelector('#instruction-tab');
+            // const sidePanelSearch = document.querySelector('#search');
+            // generalGuidancePanel.classList.toggle('active')
+            // sidePanelSearch.classList.toggle('active')
             
             map.flyTo({ center: [position.longitude, position.latitude], duration: 500 });   
         }

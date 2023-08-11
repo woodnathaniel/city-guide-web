@@ -19,3 +19,7 @@ div[class^="instructions-list-"] {
             /* cursor: pointer; */
             background-color: rga(255, 255, 255, 0.5);
         }  // at line 2695 in index at line 69 at guidance-panel
+
+
+
+        at the momet we are at append(routing with instructions) line 304

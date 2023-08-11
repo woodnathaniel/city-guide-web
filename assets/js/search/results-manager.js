@@ -1,5 +1,6 @@
 function appendParentSelector(parentSelector, selector) {
     return parentSelector ? parentSelector + ' ' + selector : selector;
+
 }
 
 /**
@@ -7,12 +8,12 @@ function appendParentSelector(parentSelector, selector) {
  * @param {String} resultsElementSelector
  */
 function ResultsManager(resultsElementSelector) {
+    // console.log(resultsElementSelector);
     this.resultsElement = document.querySelector(appendParentSelector(resultsElementSelector, '.js-results'));
     console.log(this.resultsElement);
     this.jsTabs = document.querySelector(appendParentSelector(resultsElementSelector, '.js-tabs'));
     console.log(this.jsTabs);
-    this.resultsPlaceholder =
-        document.querySelector(appendParentSelector(resultsElementSelector, '.js-results-placeholder'));
+    this.resultsPlaceholder = document.querySelector(appendParentSelector(resultsElementSelector, '.js-results-placeholder'));
     this.resultsLoader = document.querySelector(appendParentSelector(resultsElementSelector, '.js-results-loader'));
 }
 

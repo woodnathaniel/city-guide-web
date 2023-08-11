@@ -107,3 +107,7 @@
   pointer-events: none;
   filter: blur(10px);
 }
+
+.guidance-panel-scroll{
+  overflow: auto;
+}

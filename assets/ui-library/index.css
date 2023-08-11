@@ -3118,7 +3118,7 @@ div[class^="instructions-list-"].not-visible {
 .instruction-wrapper {
     display: flex;
     overflow: auto;
-    flex-direction: row;
+    flex-direction: column;
 }
 
 .message-wrapper,
