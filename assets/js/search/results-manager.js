@@ -9,19 +9,31 @@ function appendParentSelector(parentSelector, selector) {
  */
 function ResultsManager(resultsElementSelector) {
     // console.log(resultsElementSelector);
-    this.resultsElement = document.querySelector(appendParentSelector(resultsElementSelector, '.js-results'));
+    this.resultsElement = document.querySelectorAll(appendParentSelector(resultsElementSelector, '.js-results'));
     console.log(this.resultsElement);
-    this.jsTabs = document.querySelector(appendParentSelector(resultsElementSelector, '.js-tabs'));
+    this.jsTabs = document.querySelectorAll(appendParentSelector(resultsElementSelector, '.js-tabs'));
     console.log(this.jsTabs);
-    this.resultsPlaceholder = document.querySelector(appendParentSelector(resultsElementSelector, '.js-results-placeholder'));
-    this.resultsLoader = document.querySelector(appendParentSelector(resultsElementSelector, '.js-results-loader'));
+    this.resultsPlaceholder = document.querySelectorAll(appendParentSelector(resultsElementSelector, '.js-results-placeholder'));
+    this.resultsLoader = document.querySelectorAll(appendParentSelector(resultsElementSelector, '.js-results-loader'));
 }
 
 ResultsManager.prototype.loading = function() {
-    this.resultsLoader.removeAttribute('hidden');
-    this.resultsElement.setAttribute('hidden', 'hidden');
-    this.resultsPlaceholder.setAttribute('hidden', 'hidden');
-    this.resultsElement.innerHTML = '';
+    this.resultsLoader.forEach((element)=>{
+        element.removeAttribute('hidden');
+    })
+
+
+    this.resultsElement.forEach((element)=>{
+        element.setAttribute('hidden', 'hidden');
+    })
+
+    this.resultsPlaceholder.forEach((element)=>{
+        element.setAttribute('hidden', 'hidden');  
+    })
+
+    this.resultsElement.forEach((element)=>{
+        element.innerHTML = '';
+    })
 };
 
 ResultsManager.prototype.success = function() {
@@ -30,33 +42,58 @@ ResultsManager.prototype.success = function() {
     // blurElement.classList.toggle(activeBlur)
     let routePop = document.querySelector('#hide');
     routePop.classList.toggle('active');
-    this.resultsLoader.setAttribute('hidden', 'hidden');
-    this.resultsElement.removeAttribute('hidden');
-    this.jsTabs.removeAttribute('hidden');
+
+    console.log(this.resultsElement);
+    console.log(typeof(this.resultsElement));
+
+    this.resultsLoader.forEach((element)=>{
+        element.setAttribute('hidden', 'hidden'); 
+    })
+
+    this.resultsElement.forEach((element)=>{
+        element.removeAttribute('hidden');
+    })
+
+    this.jsTabs.forEach((element)=>{
+        element.removeAttribute('hidden');
+    })
    
     // this.resultsElement.style.overflow = 'hidden';
     // this.resultsElement.style.overflowY = 'scroll';
 };
 
 ResultsManager.prototype.resultsNotFound = function() {
-    this.resultsElement.setAttribute('hidden', 'hidden');
-    this.resultsLoader.setAttribute('hidden', 'hidden');
-    this.resultsPlaceholder.removeAttribute('hidden');
+    this.resultsElement.forEach((element)=>{
+        element.setAttribute('hidden', 'hidden');
+    })
+
+    this.resultsLoader.forEach((element)=>{
+        element.setAttribute('hidden', 'hidden');
+    })
+
+    this.resultsPlaceholder.forEach((element)=>{
+        element.removeAttribute('hidden');
+    })
 };
 
 ResultsManager.prototype.append = function(element) {
-    this.resultsElement.appendChild(element);
+    console.log(element)
+    console.log(typeof(element))
+    this.resultsElement.forEach((el) =>{
+        el.appendChild(element);
+    }) 
 };
 
 ResultsManager.prototype.clear = function() {
-    for (let i = 0; i < this.resultsElement.children.length; i++) {
-        this.resultsElement.removeChild(this.resultsElement.children[i]);
-    }
-
+    this.resultsElement.forEach((element) => {
+        while (element.firstChild) {
+            element.removeChild(element.firstChild);
+        }
+    });
+    
     // if(this.resultsElement.innerText == ''){
     //   this.jsTabs.setAttribute('hidden', 'hidden')
     // }
-    
 };
 
 window.ResultsManager = window.ResultsManager || ResultsManager;

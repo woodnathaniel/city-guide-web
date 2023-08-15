@@ -1812,7 +1812,7 @@ body {
     }
 
 .tt-tabs {
-    background-color:rgba(255, 0, 0, 0.5);
+    background-color:rgba(43, 32, 40, 0.5);
     /* transform: translate(-50%, -50%); */
     display: flex;
     /* flex: 1; */
@@ -1833,7 +1833,7 @@ body {
 }
 
 .tt-tabs-top {
-    background-color:rgba(255, 0, 0, 0.5);
+    background-color:rgba(23, 87, 49, 0.5);
     /* transform: translate(-50%, -50%); */
     display: flex;
     /* flex: 1; */
@@ -1844,6 +1844,7 @@ body {
     left: 50%;
     transform: translateX(-50%);
     transition: 1s;
+    z-index: 2;
     /* width: 40px; */
 }
 

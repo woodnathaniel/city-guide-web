@@ -73,17 +73,17 @@
    <div id='map' class='map-view'>
 
             <!-- <div hidden="hidden"></div>
-                <div id="instruction-tab" class='tt-tabs' >
+                <div id="instruction-tab-top" class='tt-tabs-top' >
                     <div id=" " class='tt-tabs__panel js-tabs' hidden="hidden">
                         <div class='tt-results-list js-results' ></div>
                         <div class='js-results-loader' hidden='hidden'>
                             <div class='loader-center'><span class='loader'></span></div>
                         </div>
-                        <div class='tt-tabs__placeholder js-results-placeholder -small'>
-                          
+                        <div class='tt-tabs__placeholder js-results-placeholder -small'> 
                         </div>
                     </div>
                 </div> -->
+                <div class="onclicked"></div>
                 
                 <div hidden="hidden"></div>
                 <div id="instruction-tab" class='tt-tabs' >
@@ -300,7 +300,10 @@
                 clearMap();
                 resultsManager.success();
                 var guidancePanelElement = DomHelpers.elementFactory('div', 'guidance-panel');
+                var guidancePanelElement1 = DomHelpers.elementFactory('div', 'guidance-panel1');
                 resultsManager.append(guidancePanelElement);
+                resultsManager.append(guidancePanelElement1);
+
                 var guidancePanel = new GuidancePanel(guidance, {
                     map: map,
                     coordinates: coordinates

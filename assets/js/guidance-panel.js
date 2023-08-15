@@ -54,10 +54,15 @@ var guidancePanel = (function() {
         }
         var instructionsWrapper = document.createElement('div');
         var instructionsContent = document.createElement('div');
-        // instructionsContent.classList.add('guidance-panel-scroll')
-        var parentElement = document.querySelector('.guidance-panel');
         var instructionsHeader = document.createElement('div');
 
+        // instructionsContent.classList.add('guidance-panel-scroll')
+        // let parentElement = document.querySelector('.guidance-panel');
+        let parentElement1 = document.querySelector('.guidance-panel1');
+        // console.log(parentElement)
+        console.log(parentElement1)
+        console.log(guidance)
+        
         instructionsHeader.classList.add('summary-header');
         instructionsHeader.innerText = 'Instructions';
         instructionsContent.appendChild(instructionsHeader);
@@ -66,6 +71,10 @@ var guidancePanel = (function() {
             var firstIndex = group.firstInstructionIndex;
             var lastIndex = group.lastInstructionIndex;
 
+            console.log(index)
+            console.log(group)
+
+
             instructionsData[index] = createGroupedIndexes(firstIndex, lastIndex);
             resultItem.classList = 'tt-results-list__item';
             resultItem.innerHTML = createInstructionsGroupHTML(index);
@@ -73,7 +82,11 @@ var guidancePanel = (function() {
 
         });
         instructionsContent.appendChild(instructionsWrapper);
-        parentElement.appendChild(instructionsContent);
+        // parentElement.appendChild(instructionsContent);
+        parentElement1.appendChild(instructionsContent);
+        console.log(instructionsContent)
+       
+      
 
         //InstructionGroup HTML
         function createInstructionsGroupHTML(groupIndex) {
@@ -107,7 +120,7 @@ var guidancePanel = (function() {
             );
         }
 
-    //creating Single Instructions+
+    //creating Single Instructions
         function createSingleInstruction(instructions, groupIndex) {
             let instructionOverlayHTML = '<div class="instructions-overlay">';
 
@@ -171,9 +184,13 @@ var guidancePanel = (function() {
             return maneuver[instruction.maneuver];
         }
 
+        // function createValidHTML(string) {
+        //     return string.replace(/<([^/].*?)(?=>)(.*?)<\/(.*?)(?=>)/g, '<span class="$1"$2</span');
+        // }
         function createValidHTML(string) {
-            return string.replace(/<([^/].*?)(?=>)(.*?)<\/(.*?)(?=>)/g, '<span class="$1"$2</span');
+            return string.replace(/<([^/][^>]*)(?=>)([^>]*)<\/([^>]+)(?=>)/g, '<span class="$1">$2</span>');
         }
+        
 
         function createDistanceWrapper(length, modifier) {
             var instructionDistanceData = {
@@ -223,13 +240,16 @@ var guidancePanel = (function() {
          on the map div to show the only the click div either at the top or bottom of the screen.
         on it there is a cloce or move back button where we click to send us back to the 
         general panel div and all other neccessary div hidden divs must also display */
-        function handleInstructionClick(position) {
+        function handleInstructionClick(position, index) {
             // const generalGuidancePanel = document.querySelector('#instruction-tab');
             // const sidePanelSearch = document.querySelector('#search');
             // generalGuidancePanel.classList.toggle('active')
             // sidePanelSearch.classList.toggle('active')
-            
-            map.flyTo({ center: [position.longitude, position.latitude], duration: 500 });   
+            const onclickedDiv = document.querySelector('.onclicked')
+            onclickedDiv.innerText = createValidHTML(guidance.instructions[index].message)
+            // console.log(createValidHTML(guidance.instructions[index].message))
+            map.flyTo({ center: [position.longitude, position.latitude], duration: 500 }); 
+            console.log(position) 
         }
 
         function handleInstructionHover(type, event) {
@@ -257,7 +277,8 @@ var guidancePanel = (function() {
             if (markersFactory) {
                 [].slice.call(document.querySelectorAll('.instruction')).forEach(function(instruction, index) {
                     instruction.addEventListener('click',
-                        handleInstructionClick.bind(null, guidance.instructions[index].point));
+                        handleInstructionClick.bind(null, guidance.instructions[index].point, index));
+                        console.log(guidance.instructions[index].point)
                     instruction.addEventListener('mouseenter', handleInstructionHover.bind(null, 'enter'));
                     instruction.addEventListener('mouseleave', handleInstructionHover.bind(null, 'leave'));
                 });

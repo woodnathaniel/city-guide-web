@@ -111,3 +111,11 @@
 .guidance-panel-scroll{
   overflow: auto;
 }
+
+.onclick{
+  display: flex;
+  position: absolute;
+  z-index: 1;
+  left: 0;
+  bottom: 0;
+}
