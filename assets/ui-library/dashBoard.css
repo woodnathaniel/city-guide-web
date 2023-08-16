@@ -112,10 +112,30 @@
   overflow: auto;
 }
 
-.onclick{
+/* .onclicked{
+ 
+} */
+.click-popup-div{
   display: flex;
   position: absolute;
-  z-index: 1;
-  left: 0;
-  bottom: 0;
+  z-index: 2;
+  top: 40px;
+  left: 50%;
+  transform: translateX(-50%);
+  background-color: aliceblue;
+  /* padding: 5px; */
+  border-radius: 5px;
+  visibility: hidden;
+  align-items: center;
+  gap: 10xp;
+}
+
+.click-popup-div.active-click{
+visibility: visible;
+z-index: 2;
+}
+.clear{
+  padding: 5px;
+  /* width: 10px; */
+  border-right: solid black 1px;
 }

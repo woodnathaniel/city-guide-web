@@ -83,7 +83,11 @@
                         </div>
                     </div>
                 </div> -->
-                <div class="onclicked"></div>
+                <div id="" class="click-popup-div">
+                    <div class="clear"><i class="fa-solid fa-arrow-rotate-left"></i></div>
+                    <div class="onclicked"></div>
+                </div>
+                
                 
                 <div hidden="hidden"></div>
                 <div id="instruction-tab" class='tt-tabs' >
@@ -155,7 +159,19 @@
                 let routePop = document.querySelector('#hide');
                 routePop.classList.toggle('active');
             })
+   
+            let returnDiv = document.querySelector('.clear');
+            returnDiv.addEventListener('click', function(){
+                //toggle guidance-panel and the search-panel
+                const generalGuidancePanel = document.querySelector('#instruction-tab');
+                const sidePanelSearch = document.querySelector('#search');
+                generalGuidancePanel.classList.toggle('active')
+                sidePanelSearch.classList.toggle('active')
 
+                //toggle our topvisible div
+                const onclickedDivVisible = document.querySelector('.click-popup-div')
+                onclickedDivVisible.classList.toggle('active-click')
+            })
 
 
             //creating general map

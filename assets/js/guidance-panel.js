@@ -241,11 +241,13 @@ var guidancePanel = (function() {
         on it there is a cloce or move back button where we click to send us back to the 
         general panel div and all other neccessary div hidden divs must also display */
         function handleInstructionClick(position, index) {
-            // const generalGuidancePanel = document.querySelector('#instruction-tab');
-            // const sidePanelSearch = document.querySelector('#search');
-            // generalGuidancePanel.classList.toggle('active')
-            // sidePanelSearch.classList.toggle('active')
-            const onclickedDiv = document.querySelector('.onclicked')
+            const generalGuidancePanel = document.querySelector('#instruction-tab');
+            const sidePanelSearch = document.querySelector('#search');
+            generalGuidancePanel.classList.toggle('active')
+            sidePanelSearch.classList.toggle('active')
+            const onclickedDivVisible = document.querySelector('.click-popup-div')
+            onclickedDivVisible.classList.toggle('active-click')
+            const onclickedDiv = document.querySelector('.click-popup-div .onclicked')
             onclickedDiv.innerText = createValidHTML(guidance.instructions[index].message)
             // console.log(createValidHTML(guidance.instructions[index].message))
             map.flyTo({ center: [position.longitude, position.latitude], duration: 500 }); 
