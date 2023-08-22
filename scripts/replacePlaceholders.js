@@ -2,7 +2,7 @@ const replaceInFile = require('replace-in-file');
 const path = require('path');
 const config = require('../config');
 
-console.log('Replace placeholders starting...'); //eslint-disable-line
+console.log('Replace placeholders starting...')
 
 const cdnRegexes = Object.keys(config.cdn).reduce((acc, key) => {
     acc[key] = new RegExp(`/cdn.${key}`, 'gm');
@@ -14,7 +14,7 @@ const keysRegexes = Object.keys(config.keys).reduce((acc, key) => {
     return acc;
 }, {});
 
-const hostedStylesRegex = new RegExp(`\\\${hostedStylesVersion}`, 'gm'); //eslint-disable-line
+const hostedStylesRegex = new RegExp(`\\\${hostedStylesVersion}`, 'gm');
 
 const styleRegexes = Object.keys(config.styles).reduce((acc, customStyle) => {
     acc[customStyle] = new RegExp(`\\\${styles.${customStyle}}`, 'gm');
@@ -59,5 +59,5 @@ const values = {
         to: valuesForReplacement
     });
 
-    console.log('Replace placeholders finished!'); //eslint-disable-line
+    console.log('Replace placeholders finished!'); 
 })();

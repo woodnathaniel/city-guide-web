@@ -245,6 +245,8 @@ var guidancePanel = (function() {
             const sidePanelSearch = document.querySelector('#search');
             generalGuidancePanel.classList.toggle('active')
             sidePanelSearch.classList.toggle('active')
+
+            
             const onclickedDivVisible = document.querySelector('.click-popup-div')
             onclickedDivVisible.classList.toggle('active-click')
             const onclickedDiv = document.querySelector('.click-popup-div .onclicked')

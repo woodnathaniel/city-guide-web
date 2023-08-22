@@ -7,10 +7,9 @@
   "main": "index.js",
   "scripts": {
     "build": "node scripts/copyToDist.js && node scripts/replacePlaceholders.js",
-    "start": "live-server --open=dist"
+    "start": "live-server --open=dist/routing-with-instructions.html"
   },
-  "author": "Tomtom",
-  "license": "SEE LICENSE IN LICENSE.TXT",
+  "author": "",
   "devDependencies": {
     "ncp": "2.0.0",
     "replace-in-file": "4.1.3",

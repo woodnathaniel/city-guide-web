@@ -83,7 +83,7 @@
                     <div class="travel-mode"> 
                         <select name="Travel Mode" id="travel-mode" class="select-mode">
                             <option value='pedestrian'>Pedestrian</option>
-                            <option value='car' onclick="TravelModeChange()"><i class="fa-solid fa-car"></i></option>
+                            <option value='car'><i class="fa-solid fa-car"></i></option>
                             <option value='truck'>Truck</option>
                             <option value='bicycle'>Bicycle</option>
                             <option value='bus'>Bus</option>
@@ -202,7 +202,13 @@
                 document.querySelector('.tt-tabs').classList.toggle('active')
             })
 
-            const travelMode = 'pedestrian';
+            let travelMode = 'pedestrian';
+
+
+            var selectElement = document.querySelector('#traffic-layers');
+
+        
+
             
             // function TravelModeChange(){
                 
@@ -222,9 +228,53 @@
             var map = tt.map({
                 key: 'lsWGbzvufAqYQdHCpV6HMVq3CCA0rYdz',
                 container: 'map',
-                dragPan: !isMobileOrTablet()
+                dragPan: !isMobileOrTablet(),
+                travelMode: travelMode,
+                stylesVisibility: {
+                    trafficIncidents: true,
+                    trafficFlow: true
+                },
+                trackSize: true,            
+            });
+
+            console.log(map)
+            
+            // Add an event listener to the select traffic to show
+            selectElement.addEventListener('change', function(event) {
+                var selectedValue = event.target.value;
+                
+                // Assuming you have a 'map' object
+                if (selectedValue === 'Traffic-flow') {
+                    map.showTrafficFlow();
+                } 
+                else if (selectedValue === 'Traffic-Incident') {
+                    map.showTrafficIncidents();
+                };
             });
             
+            document.addEventListener("DOMContentLoaded", function() {
+                // Get a reference to the select element
+                var selectElement = document.getElementById("travel-mode");
+
+                // Add an event listener to the select element
+                    selectElement.addEventListener("change", function() {
+                     // Get the selected option.
+                    var selectedOption = selectElement.options[selectElement.selectedIndex];
+                        
+                     // Get the value of the selected option.
+                    var selectedValue = selectedOption.value;
+                    travelMode = selectedValue;
+                        console.log(selectedValue)
+                        console.log(travelMode)
+                        performCalculateRouteRequest()
+                        
+                });
+            });
+
+
+            console.log(travelMode)
+
+            // map.showTrafficFlow()
             // map.on('load', function() {
             //     travelModeSelector.on('change', handleTravelModeChange);
             //     performCalculateRouteRequest();
@@ -233,6 +283,7 @@
             //     travelMode = event.key;
             //     performCalculateRouteRequest();
             // }
+
 
             var finishMarkerElement = createMarkerElement('finish');
             var startMarkerElement = createMarkerElement('start');
