@@ -229,7 +229,6 @@
                 key: 'lsWGbzvufAqYQdHCpV6HMVq3CCA0rYdz',
                 container: 'map',
                 dragPan: !isMobileOrTablet(),
-                travelMode: travelMode,
                 stylesVisibility: {
                     trafficIncidents: true,
                     trafficFlow: true
@@ -262,12 +261,11 @@
                     var selectedOption = selectElement.options[selectElement.selectedIndex];
                         
                      // Get the value of the selected option.
-                    var selectedValue = selectedOption.value;
-                    travelMode = selectedValue;
+                       var selectedValue = selectedOption.value;
+                       travelMode = selectedValue;
                         console.log(selectedValue)
                         console.log(travelMode)
-                        performCalculateRouteRequest()
-                        
+                        handleDrawRoute();
                 });
             });
 
