@@ -72,34 +72,57 @@
 
    <div id='map' class='map-view'>
 
-            <!-- <div hidden="hidden"></div>
-                <div id="instruction-tab-top" class='tt-tabs-top' >
-                    <div id=" " class='tt-tabs__panel js-tabs' hidden="hidden">
-                        <div class='tt-results-list js-results' ></div>
-                        <div class='js-results-loader' hidden='hidden'>
-                            <div class='loader-center'><span class='loader'></span></div>
-                        </div>
-                        <div class='tt-tabs__placeholder js-results-placeholder -small'> 
-                        </div>
-                    </div>
-                </div> -->
+           
                 <div id="" class="click-popup-div">
                     <div class="clear"><i class="fa-solid fa-arrow-rotate-left"></i></div>
                     <div class="onclicked"></div>
                 </div>
-                
-                
-                <div hidden="hidden"></div>
-                <div id="instruction-tab" class='tt-tabs' >
-                    <div id=" " class='tt-tabs__panel js-tabs' hidden="hidden">
-                        <div class='tt-results-list js-results' ></div>
-                        <div class='js-results-loader' hidden='hidden'>
-                            <div class='loader-center'><span class='loader'></span></div>
-                        </div>
-                        <div class='tt-tabs__placeholder js-results-placeholder -small'>
-                        </div>
+
+               
+                <div class="menu">
+                    <div class="travel-mode"> 
+                        <select name="Travel Mode" id="travel-mode" class="select-mode">
+                            <option value='pedestrian'>Pedestrian</option>
+                            <option value='car' onclick="TravelModeChange()"><i class="fa-solid fa-car"></i></option>
+                            <option value='truck'>Truck</option>
+                            <option value='bicycle'>Bicycle</option>
+                            <option value='bus'>Bus</option>
+                            <option value='van'>Van</option>
+                            <option value='motorcycle'>Motorcycle</option>
+                            <option value='taxi'>Taxi</option>
+                        </select>
+                    </div>
+
+                    <div >
+                        <select name="traffic-layers" id="traffic-layers">
+                            <option value="Traffic-flow">Traffic flow</option>
+                            <option value="Traffic-Incident">Traffic Incident</option>
+                        </select>
                     </div>
                 </div>
+
+                <div class="menu-panel">
+                    <div class="distance-time">
+                        <p class="distance"></p>
+                        <p class="time"></p>
+                    </div>
+                    <div class="step"><i class="fa-solid fa-bars step-icon"><span>STEP</span></i></div>
+                </div>
+                
+                
+                    <div hidden="hidden"></div>
+                    <div id="instruction-tab" class='tt-tabs' >
+                        <div id=" " class='tt-tabs__panel js-tabs' hidden="hidden">
+                            <div class='tt-results-list js-results' ></div>
+                            <div class='js-results-loader' hidden='hidden'>
+                                <div class='loader-center'><span class='loader'></span></div>
+                            </div>
+                            <div class='tt-tabs__placeholder js-results-placeholder -small'>
+                            </div>
+                        </div>
+                    </div>
+                    
+             
             
 
             <!--THE SEARCH UI-->
@@ -124,7 +147,9 @@
         <script src='https://api.tomtom.com/maps-sdk-for-web/cdn/6.x/6.23.0/maps/maps-web.min.js'></script>
         <script src='https://api.tomtom.com/maps-sdk-for-web/cdn/6.x/6.23.0/services/services-web.min.js'></script>
         <script src='https://api.tomtom.com/maps-sdk-for-web/cdn/plugins/SearchBox/3.2.0//SearchBox-web.js'></script>
-
+        
+        <script type='text/javascript' src='../assets/js/tail.select.min.js'></script>
+        <script data-showable type='text/javascript' src='../assets/js/tail-selector.js'></script>
         <script data-showable type='text/javascript' src='../assets/js/search-markers/search-marker.js'></script>
         <script data-showable type='text/javascript' src='../assets/js/search/search-results-parser.js'></script>
         <script data-showable type='text/javascript' src='../assets/js/search-markers/search-markers-manager.js'></script>
@@ -139,7 +164,7 @@
         <script data-showable type='text/javascript' src='../assets/js/guidance-panel.js'></script>
         <script data-showable type='text/javascript' src='../assets/js/search/searchbox-enter-submit.js'></script>
 
-        <script>
+    <script>
        
         function toggle(){
             let blurElement = document.querySelector('#map');
@@ -168,18 +193,46 @@
                 generalGuidancePanel.classList.toggle('active')
                 sidePanelSearch.classList.toggle('active')
 
-                //toggle our topvisible div
-                const onclickedDivVisible = document.querySelector('.click-popup-div')
-                onclickedDivVisible.classList.toggle('active-click')
+                //toggle our topvisible guidance div
+                const onclickedDivVisible = document.querySelector('.click-popup-div');
+                onclickedDivVisible.classList.toggle('active-click');
+            })
+             
+            document.querySelector('.step').addEventListener('click', ()=>{
+                document.querySelector('.tt-tabs').classList.toggle('active')
             })
 
+            const travelMode = 'pedestrian';
+            
+            // function TravelModeChange(){
+                
+            // }
+
+            // function handleTravelModeChange(event) {
+            //     travelMode = event.key;
+            //     performCalculateRouteRequest();
+            // }
+
+            // map.on('load', function() {
+            //     travelModeSelector.on('change', handleTravelModeChange);
+            //     performCalculateRouteRequest();
+            // });
 
             //creating general map
             var map = tt.map({
-                key: 'GZ2CohvCdB2RplDFGwFCyCg8gWO0YSKQ',
+                key: 'lsWGbzvufAqYQdHCpV6HMVq3CCA0rYdz',
                 container: 'map',
                 dragPan: !isMobileOrTablet()
             });
+            
+            // map.on('load', function() {
+            //     travelModeSelector.on('change', handleTravelModeChange);
+            //     performCalculateRouteRequest();
+            // });
+            // function handleTravelModeChange(event) {
+            //     travelMode = event.key;
+            //     performCalculateRouteRequest();
+            // }
 
             var finishMarkerElement = createMarkerElement('finish');
             var startMarkerElement = createMarkerElement('start');
@@ -189,6 +242,8 @@
             var resultsManager = new ResultsManager();
 
             var routeMarkers = {}, routePoints = {}, searchBox = {};
+            var distance;
+            var time;
 
             map.addControl(new tt.FullscreenControl({container: document.querySelector('body')}));
             map.addControl(new tt.NavigationControl());
@@ -249,7 +304,7 @@
                 var searchBox = new tt.plugins.SearchBox(tt.services, {
                     showSearchButton: false,
                     searchOptions: {
-                        key: 'GZ2CohvCdB2RplDFGwFCyCg8gWO0YSKQ'
+                        key: 'lsWGbzvufAqYQdHCpV6HMVq3CCA0rYdz'
                     },
                     labels: {
                         placeholder: 'Query e.g. Washington'
@@ -309,6 +364,7 @@
 
             function handleCalculateRouteResponse(response, type) {
                 var geojson = response.toGeoJson();
+                console.log(geojson);
                 var feature = geojson.features[0];
                 var coordinates = feature.geometry.coordinates;
                 var guidance = feature.properties.guidance;
@@ -359,6 +415,26 @@
                 performCalculateRouteRequest()
                     .then(function(response) {
                         handleCalculateRouteResponse(response, type);
+                        console.log(response)
+                        var departureTime = response.routes[0].summary.departureTime
+                        var arrivalTime = response.routes[0].summary.arrivalTime
+                        
+                        // Convert ISO date strings to Date objects
+                        const date1 = new Date(departureTime);
+                        const date2 = new Date(arrivalTime);
+
+                        // Calculate the time difference in milliseconds
+                        const timeDifferenceInMilliseconds = Math.abs(date2 - date1);
+
+                        // Convert the time difference to hours, minutes, and seconds
+                        const hours = Math.floor(timeDifferenceInMilliseconds / 3600000); // 1 hour = 3600000 milliseconds
+                        const minutes = Math.floor((timeDifferenceInMilliseconds % 3600000) / 60000); // 1 minute = 60000 milliseconds
+                        const seconds = Math.floor((timeDifferenceInMilliseconds % 60000) / 1000); // 1 second = 1000 milliseconds
+
+                        time = `${hours} hours, ${minutes} minutes, ${seconds} seconds`
+                        distance = `${response.routes[0].summary.lengthInMeters} meters`
+                        document.querySelector('.distance-time .time').textContent = time
+                        document.querySelector('.distance-time .distance').textContent = distance
                     })
                     .catch(handleCalculateRouteError);
             }
@@ -390,8 +466,9 @@
                 return tt.services.calculateRoute({
                     key: 'GZ2CohvCdB2RplDFGwFCyCg8gWO0YSKQ',
                     instructionsType: 'tagged',
-                    traffic: false,
-                    locations: routePoints.start.join() + ':' + routePoints.finish.join()
+                    traffic: true,
+                    locations: routePoints.start.join() + ':' + routePoints.finish.join(),
+                    travelMode: travelMode,
                 });
             }
 

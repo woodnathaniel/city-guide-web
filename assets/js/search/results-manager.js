@@ -60,6 +60,9 @@ ResultsManager.prototype.success = function() {
    
     // this.resultsElement.style.overflow = 'hidden';
     // this.resultsElement.style.overflowY = 'scroll';
+
+                document.querySelector('.menu').classList.toggle('active-menu');
+                document.querySelector('.menu-panel').classList.toggle('active-menu-panel')
 };
 
 ResultsManager.prototype.resultsNotFound = function() {

@@ -684,7 +684,7 @@ body {
     /* margin: 0; */
     width: 376px;
     z-index: 1;
-    top: 0;
+    top: 50px;
     left: 50%;
     transform: translate(-50%, -50%);
     transition: 1s;
@@ -693,7 +693,6 @@ body {
     /* margin-left: 50px; */
     /* border: solid 2px red; */
     border-radius: 10px;
-    transform: 0.5s;
 }
 .tt-side-panel-search.active{
   z-index: 0;
@@ -1819,17 +1818,20 @@ body {
     flex-direction: column;
     /* overflow: auto; */
     position: absolute;
-    bottom: 0;
+    bottom: -100px;
     left: 50%;
     transform: translateX(-50%);
-    transition: 1s;
-    z-index: 0;
-    /* width: 40px; */
+    transition: top 2.5s ease-out;
+    z-index: 1;
+    visibility: hidden;
+    /* width: auto; */
 }
 
 .tt-tabs.active{
- z-index: 0 ;
- transition: 1s;
+ z-index: 1;
+ transition: top 2.5s ease-out;
+ bottom: 0;
+ visibility: visible;
 }
 
 .tt-tabs-top {
