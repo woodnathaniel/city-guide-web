@@ -145,14 +145,26 @@ select:hover{
   background-color: rgba(185, 185, 185, 0.8);
 }
 
+.layer-menu{
+  display: flex;
+  flex-direction: row;
+}
 
 .traffic-layers{
+  display: flex;
+  flex-direction: row;
+  gap: 70px;
   border-width: 0px;
   border-radius: 5px;
   background-color: rgb(185, 185, 185);
   padding: 5px;
   cursor: pointer;
   transition: 0.2s;
+  width: 180px;
+}
+.layer-menu{
+  background-color: rgb(185, 185, 185);
+
 }
 
 .traffic-layers:hover{
