@@ -680,7 +680,7 @@ body {
     justify-content: center;
     align-items: center;
     font-family: Gotham, Helvetica, Arial, sans-serif;
-    overflow: auto;
+    /* overflow: auto; */
     /* margin: 0; */
     width: 376px;
     z-index: 1;
@@ -694,6 +694,7 @@ body {
     /* border: solid 2px red; */
     border-radius: 10px;
 }
+
 .tt-side-panel-search.active{
   z-index: 0;
   transition: 1s;
@@ -1824,7 +1825,9 @@ body {
     transition: top 2.5s ease-out;
     z-index: 1;
     visibility: hidden;
+    height: 50%;
     /* width: auto; */
+    border-radius: 5px;
 }
 
 .tt-tabs.active{
@@ -1894,8 +1897,8 @@ body {
         }
 
 .tt-tabs__panel{
-        overflow: hidden;
-        overflow: scroll;
+        
+        overflow: auto;
         /* padding: 10px; */
         /* background-color: gray; */
         
@@ -3066,11 +3069,11 @@ div[class^="instructions-header-"] {
 }
 
 div[class^="instructions-header-"]:hover {
-        background-color: #e5e5e5;
+        background-color: #464545;
     }
 
 div[class^="instructions-list-"] {
-    background-color: #f2f2f2;
+    background-color: rgba(0, 0, 0, .09);
 
 }
 
@@ -3081,7 +3084,6 @@ div[class^="instructions-list-"].not-visible {
 .instructions-overlay {
     font-size: 14px;
     line-height: 24px;
-    overflow: auto;
 }
 
 .instruction {
@@ -3099,7 +3101,7 @@ div[class^="instructions-list-"].not-visible {
     }
 
 .instruction:hover {
-        background-color: #e5e5e5;
+        background-color: rgba(134, 134, 134, 0.5);
     }
 
 .icon-wrapper {
@@ -3127,7 +3129,7 @@ div[class^="instructions-list-"].not-visible {
 .message-wrapper,
 .distance-wrapper.-instruction {
     margin-left: 12px;
-    color: chartreuse;
+    color: rgb(17, 17, 17);
 }
 
 div[class^="guidance-marker-"] {

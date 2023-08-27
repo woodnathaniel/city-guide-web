@@ -250,8 +250,32 @@ var guidancePanel = (function() {
             const onclickedDivVisible = document.querySelector('.click-popup-div')
             onclickedDivVisible.classList.toggle('active-click')
             const onclickedDiv = document.querySelector('.click-popup-div .onclicked')
-            onclickedDiv.innerText = createValidHTML(guidance.instructions[index].message)
-            // console.log(createValidHTML(guidance.instructions[index].message))
+            onclickedDiv.innerHTML = createValidHTML(guidance.instructions[index].message)
+
+            const menu = document.querySelector('.menu')
+            const menuPanel = document.querySelector('.menu-panel')
+            const searchBox = document.querySelector('.tt-side-panel-search')
+            searchBox.classList.toggle('active')
+
+            if( menu.classList.contains('active-menu')){
+                menu.classList.remove('active-menu')
+            } else{
+                menu.classList.remove('active-menu') 
+            }
+
+            if(menuPanel.classList.contains('active-menu-panel')){
+                menuPanel.classList.remove('active-menu-panel')
+            }else{
+                menuPanel.classList.remove('active-menu-panel')
+            }
+         
+            // if(searchBox.classList.contains('active')){
+            //     searchBox.classList.remove('active')
+            // }else{
+            //     searchBox.classList.remove('active')
+            // }
+
+                       // console.log(createValidHTML(guidance.instructions[index].message))
             map.flyTo({ center: [position.longitude, position.latitude], duration: 500 }); 
             console.log(position) 
         }

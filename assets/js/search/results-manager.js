@@ -34,6 +34,7 @@ ResultsManager.prototype.loading = function() {
     this.resultsElement.forEach((element)=>{
         element.innerHTML = '';
     })
+
 };
 
 ResultsManager.prototype.success = function() {
@@ -57,12 +58,32 @@ ResultsManager.prototype.success = function() {
     this.jsTabs.forEach((element)=>{
         element.removeAttribute('hidden');
     })
+
+    const menu = document.querySelector('.menu')
+    if(!menu.classList.contains('active-menu')){
+      menu.classList.add('active-menu')
+    }
+     
+
+    const menuPanel = document.querySelector('.menu-panel')
+    if(!menuPanel.classList.contains('active-menu-panel')){
+      menuPanel.classList.add('active-menu-panel')
+    }
+
+    const searchBox = document.querySelector('.tt-side-panel-search')
+    if(!searchBox.classList.contains('active')){
+      searchBox.classList.add('active')
+    }
+     
+
    
     // this.resultsElement.style.overflow = 'hidden';
     // this.resultsElement.style.overflowY = 'scroll';
 
-                document.querySelector('.menu').classList.toggle('active-menu');
-                document.querySelector('.menu-panel').classList.toggle('active-menu-panel')
+                // document.querySelector('.menu').classList.toggle('active-menu');
+                // document.querySelector('.menu-panel').classList.toggle('active-menu-panel')
+
+    
 };
 
 ResultsManager.prototype.resultsNotFound = function() {

@@ -16,6 +16,7 @@
         <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.5/font/bootstrap-icons.css">
     </head>
     <style>
+
         .map-view .icon {
             height: 30px;
             width: 30px;
@@ -60,11 +61,13 @@
     <form id="hide" class='tt-side-panel js-form'>
         <header class='tt-side-panel__header'>
             <div class='input-wrapper'>
-                <div class='tt-icon icon-spacing -start'></div>
+                <div class="get-location" onclick="reserveValue()"><i class="fa-solid fa-location-crosshairs"></i></div>
+                <!-- <div class='tt-icon icon-spacing -start'></div> -->
                 <div id='startSearchBox' class='tt-form-label searchbox'></div>
             </div>
             <div class='input-wrapper'>
-                <div class='tt-icon icon-spacing -finish'></div>
+                <div><i class="fa-solid fa-road-barrier"></i></div>
+                <!-- <div class='tt-icon icon-spacing -finish'></div> -->
                 <div id='finishSearchBox' class='tt-form-label searchbox'></div>
             </div>  
         </header>
@@ -81,40 +84,44 @@
 
                
                 <div class="menu">
-                    <div class="travel-mode"> 
-                        <select name="Travel Mode" id="travel-mode" class="select-mode">
-                            <option value='pedestrian'>Pedestrian</option>
-                            <option value='car'><i class="fa-solid fa-car"></i></option>
-                            <option value='truck'>Truck</option>
-                            <option value='bicycle'>Bicycle</option>
-                            <option value='bus'>Bus</option>
-                            <option value='van'>Van</option>
-                            <option value='motorcycle'>Motorcycle</option>
-                            <option value='taxi'>Taxi</option>
-                        </select>
-                    </div>
-
-                    <div >
-                        <div class='traffic-layers'>
-                            <input type='checkbox' class='tt-checkbox' id='incidents' checked='true'>
-                            <label class='tt-label' for="incidents"><i class="bi bi-stoplights"></i></label>
-                            <input type='checkbox' class='tt-checkbox' id='flow' checked='true'>
-                            <label class='tt-label' for="flow"><i class="bi bi-sign-stop-lights"></i></label>
-                        </div>
-                    </div>
+                    
+                       <div class="travel-option" onclick="TravelModeChange(car)" data-value="car"><i class="fa-solid fa-car-rear"></i></div>
+                       <div class="travel-option" onclick="TravelModeChange(motor)" data-value="motorcycle"><i class="fa-solid fa-motorcycle"></i></div>
+                       <div class="travel-option" onclick="TravelModeChange(van)"  data-value="van"> <i class="fa-solid fa-motorcycle"></i></div>
+                       <div class="travel-option" onclick="TravelModeChange(bicycle)" data-value="bicycle"> <i class="fa-solid fa-person-biking"></i></div>
+                       <div class="travel-option" onclick="TravelModeChange(walk)" data-value="pedestrian"><i class="fa-solid fa-person-walking"></i></div>
+                        
+                       <div class="traffic-ellipse"><i class="fa-solid fa-ellipsis-vertical"></i></div>
                 </div>
+              
+                    <div class='traffic-layers'>
+                        <input type='checkbox' class='tt-checkbox' id='incidents' checked='true'>
+                        <label class='tt-label' for="incidents"><i class="bi bi-stoplights"></i></label>
+                        <input type='checkbox' class='tt-checkbox' id='flow' checked='true'>
+                        <label class='tt-label' for="flow"><i class="bi bi-sign-stop-lights"></i></label>
+                    </div>
+                
 
                 <div class="menu-panel">
-                    <div class="distance-time">
+                    <div class="distanceBox">
+                        <i class="fa-solid fa-ruler-horizontal"></i>
                         <p class="distance"></p>
+                    </div>
+                    <div class="timeBox">
+                        <i class="fa-solid fa-clock"></i>
                         <p class="time"></p>
                     </div>
-                    <div class="step"><i class="fa-solid fa-bars step-icon"><span>STEP</span></i></div>
+                    <div class="step">
+                        <i class="fa-solid fa-bars step-icon"></i>
+                    </div>
                 </div>
                 
                 
                     <div hidden="hidden"></div>
                     <div id="instruction-tab" class='tt-tabs' >
+                        <div class="stepBox-close">
+                            <i class="fa-regular fa-circle-xmark"></i>
+                        </div>
                         <div id=" " class='tt-tabs__panel js-tabs' hidden="hidden">
                             <div class='tt-results-list js-results' ></div>
                             <div class='js-results-loader' hidden='hidden'>
@@ -194,23 +201,69 @@
                 const generalGuidancePanel = document.querySelector('#instruction-tab');
                 const sidePanelSearch = document.querySelector('#search');
                 generalGuidancePanel.classList.toggle('active')
-                sidePanelSearch.classList.toggle('active')
+                if(!sidePanelSearch.classList.contains('active')){
+                  sidePanelSearch.classList.add('active')
+                }
 
                 //toggle our topvisible guidance div
                 const onclickedDivVisible = document.querySelector('.click-popup-div');
                 onclickedDivVisible.classList.toggle('active-click');
+
+                const menu = document.querySelector('.menu')
+                if(!menu.classList.contains('menu-active')){
+                   menu.classList.add('menu-active')
+                }
             })
              
             document.querySelector('.step').addEventListener('click', ()=>{
                 document.querySelector('.tt-tabs').classList.toggle('active')
+                const menu = document.querySelector('.menu')
+                if(menu.classList.contains('active-menu')){
+                    menu.classList.remove('active-menu')
+                }
+
+                const menuPanel = document.querySelector('.menu-panel')
+                if(  menuPanel.classList.contains('active-menu-panel')){
+                    menuPanel.classList.remove('active-menu-panel')
+                }  
             })
 
-            let travelMode = 'car';
+            document.querySelector('.stepBox-close').addEventListener('click', ()=>{
+                document.querySelector('.tt-tabs').classList.toggle('active')
+
+                const menu = document.querySelector('.menu')
+                if(!menu.classList.contains('active-menu')){
+                    menu.classList.add('active-menu')
+                }
+
+                const menuPanel = document.querySelector('.menu-panel')
+                if(!menuPanel.classList.contains('active-menu-panel')){
+                    menuPanel.classList.add('active-menu-panel')
+                } 
+            })
+
+            let travelMode = 'van';
 
 
             var selectElement = document.querySelector('#traffic-layers');
 
         
+            const travelOptions = document.querySelectorAll('.travel-option');
+
+            travelOptions.forEach(travelOption => {
+               travelOption.addEventListener('click', () => {
+                // Remove 'selected' class from all items
+                travelOptions.forEach(item => {
+                  travelOption.classList.remove('selected');
+                });
+
+                // Add 'selected' class to the clicked item
+                travelOption.classList.add('selected');
+               travelMode = travelOption.getAttribute('data-value')
+               console.log(travelMode)
+               handleDrawRoute();
+            });
+            });
 
             
             // function TravelModeChange(){
@@ -255,24 +308,33 @@
                     map.hideTrafficIncidents();
                 }
             });
+
+           
             
             
 
-            document.addEventListener("DOMContentLoaded", function() {
-                // Get a reference to the select element
-                var selectElement = document.getElementById("travel-mode");
+            //  function TravelModeChange(para) {
+            //     // Get a reference to the select element
+            //     let parameter = `.${para}`
+            //     console.log(parameter)
 
-                // Add an event listener to the select element
-                    selectElement.addEventListener("change", function() {
-                     // Get the selected option.
-                    var selectedOption = selectElement.options[selectElement.selectedIndex];
+            //     var selectElement = document.getElementById();
+
+            //     // Add an event listener to the select element
+            //         selectElement.addEventListener("click", function() {
+            //          // Get the selected option.
+            //         var selectedOption = selectElement.options[selectElement.selectedIndex];
                         
-                     // Get the value of the selected option.
-                       var selectedValue = selectedOption.value;
-                       travelMode = selectedValue;
-                        handleDrawRoute();
-                });
-            });
+            //          // Get the value of the selected option.
+            //            var selectedValue = selectedOption.value;
+            //            travelMode = selectedValue;
+
+            //            //handle menu div
+                    
+
+            //             handleDrawRoute();
+            //     });
+            // };
 
 
             console.log(travelMode)
@@ -299,12 +361,85 @@
             var distance;
             var time;
 
-            map.addControl(new tt.FullscreenControl({container: document.querySelector('body')}));
-            map.addControl(new tt.NavigationControl());
-            map.on('load', function() {
-                searchBox.start = createSearchBox('start');
-                searchBox.finish = createSearchBox('finish');
+
+            const FullscreenControl = new tt.FullscreenControl({container: document.querySelector('body')})
+            const navigationControl = new tt.NavigationControl({})
+            map.addControl(FullscreenControl, 'bottom-right');
+            map.addControl(navigationControl);
+
+            var observeMenuPanel = document.querySelector('.tt-tabs');
+
+        // observing the menu-panel existance to remove the map addControls
+            var observer = new MutationObserver(function(mutationsList) {
+                for (var mutation of mutationsList) {
+                    if (mutation.type === 'attributes' && mutation.attributeName === 'class') {
+                        // The class attribute of the observed element has changed
+                        // You can perform actions here based on the class change
+                        if (observeMenuPanel.classList.contains('active')) {
+                            map.removeControl(FullscreenControl);
+                            map.removeControl(navigationControl);
+                        }
+                        else{
+                            map.addControl(FullscreenControl, 'bottom-right');
+                            map.addControl(navigationControl);
+                        }
+                    }
+                }
             });
+
+            // Configuration and activation of the observer
+            var observerConfig = { attributes: true }; 
+            observer.observe(observeMenuPanel, observerConfig);
+
+            map.on('load', function() {
+                searchBox.start = createSearchBoxStart('start');
+                searchBox.finish = createSearchBoxFinish('finish');
+            });
+            
+
+            function reserveValue(){
+
+                var geolocateControl = new tt.GeolocateControl({
+                    positionOptions: {
+                        enableHighAccuracy: true
+                    },
+                    fitBoundsOptions:{maxZoom:0},
+                    showAccuracyCircle: false,
+                    showUserLocation: false,
+                    trackUserLocation: true
+                });
+
+                geolocateControl.on('geolocate', function(event) {
+
+                   
+                       const lng= event.coords.longitude
+                       const lat= event.coords.latitude
+                    
+                    
+
+                });
+
+                new tt.services.reverseGeocode({
+                    key: 'GZ2CohvCdB2RplDFGwFCyCg8gWO0YSKQ',
+                    position: `${lng}, ${lat}`,
+                    language: 'en-GB'
+                }).then((response)=>{
+                    getLocation(response)
+                })
+
+                function getLocation(response){
+                    createSearchBoxStart()
+                    
+                    const location = document.querySelector('.get-location')
+                    location.addEventListener('click', () => {
+                        createSearchBoxStart().setValue(`${response.addresses.address[0].localName}`)
+                    })
+                }
+            
+            }
+
+            
+            
 
             function addRouteMarkers(type, point) {
                 var lngLat = point && point[type + 'Point'] || routePoints[type];
@@ -354,14 +489,41 @@
                     .on('dragend', getDraggedMarkerPosition.bind(null, type));
             }
 
-            function createSearchBox(type) {
+            function createSearchBoxStart(type) {
                 var searchBox = new tt.plugins.SearchBox(tt.services, {
                     showSearchButton: false,
                     searchOptions: {
                         key: 'lsWGbzvufAqYQdHCpV6HMVq3CCA0rYdz'
                     },
                     labels: {
-                        placeholder: 'Query e.g. Washington'
+                        placeholder: 'Query your Starting Location'
+                    }
+                });
+
+                document.getElementById(type + 'SearchBox').appendChild(searchBox.getSearchBoxHTML());
+                searchBox.on('tomtom.searchbox.resultscleared', onResultCleared.bind(null, type));
+
+                searchBox.on('tomtom.searchbox.resultsfound', function(event) {
+                    handleEnterSubmit(event, onResultSelected.bind(this), errorHint, type);
+                });
+
+                searchBox.on('tomtom.searchbox.resultselected', function(event) {
+                    if (event.data && event.data.result) {
+                        onResultSelected(event.data.result, type);
+                    }
+                });
+
+                return searchBox;
+            }
+
+            function createSearchBoxFinish(type) {
+                var searchBox = new tt.plugins.SearchBox(tt.services, {
+                    showSearchButton: false,
+                    searchOptions: {
+                        key: 'lsWGbzvufAqYQdHCpV6HMVq3CCA0rYdz'
+                    },
+                    labels: {
+                        placeholder: 'Query your Destination Location'
                     }
                 });
 
@@ -424,10 +586,8 @@
                 var guidance = feature.properties.guidance;
 
                 clearMap();
-                resultsManager.success();
-                var guidancePanelElement = DomHelpers.elementFactory('div', 'guidance-panel');
+                resultsManager.success()
                 var guidancePanelElement1 = DomHelpers.elementFactory('div', 'guidance-panel1');
-                resultsManager.append(guidancePanelElement);
                 resultsManager.append(guidancePanelElement1);
 
                 var guidancePanel = new GuidancePanel(guidance, {
@@ -447,7 +607,7 @@
                         },
                         'paint': {
                             'line-color': routeColors[0],
-                            'line-width': 2
+                            'line-width': 6
                         }
                     });
                
@@ -487,11 +647,18 @@
                         const hours = Math.floor(timeDifferenceInMilliseconds / 3600000); // 1 hour = 3600000 milliseconds
                         const minutes = Math.floor((timeDifferenceInMilliseconds % 3600000) / 60000); // 1 minute = 60000 milliseconds
                         const seconds = Math.floor((timeDifferenceInMilliseconds % 60000) / 1000); // 1 second = 1000 milliseconds
-
-                        time = `${hours} hours, ${minutes} minutes, ${seconds} seconds`
-                        distance = `${response.routes[0].summary.lengthInMeters} meters`
-                        document.querySelector('.distance-time .time').textContent = time
-                        document.querySelector('.distance-time .distance').textContent = distance
+                        const kilometer = response.routes[0].summary.lengthInMeters / 1000
+                        
+                        distance = `${kilometer} km`
+                         const timeBox = document.querySelector('.timeBox .time')
+                        if(hours === 0){
+                            timeBox.textContent = `${minutes +1} min`
+                        }
+                        else{
+                           timeBox.textContent = `${hours} hr`
+                        }
+                        
+                        document.querySelector('.distanceBox .distance').textContent = distance
                     })
                     .catch(handleCalculateRouteError);
             }
@@ -616,19 +783,27 @@ const routeBtn = document.getElementById('route-direction');
 
         var geolocateControl = new tt.GeolocateControl({
             positionOptions: {
-                enableHighAccuracy: false
-            }
+                enableHighAccuracy: true
+            },
+            
+            trackUserLocation: true,
+            
         });
 
+        console.log(geolocateControl);
         geolocateControl.on('geolocate', function(event) {
             var coordinates = event.coords;
+            console.log(event)
             state.userLocation = [coordinates.longitude, coordinates.latitude];
             ttSearchBox.updateOptions(Object.assign({}, ttSearchBox.getOptions(), {
                 distanceFromPoint: state.userLocation
             }));
         });
 
-        map.addControl(geolocateControl);
+     
+            
+
+        map.addControl(geolocateControl, 'bottom-right');
 
         var resultsManagerSearch = new ResultsManagerSearch();
         var searchMarkersManager = new SearchMarkersManager(map);
@@ -648,7 +823,7 @@ const routeBtn = document.getElementById('route-direction');
             var newSearchOptions = Object.assign({}, oldSearchOptions, { center: map.getCenter() });
             var newAutocompleteOptions = Object.assign({}, oldautocompleteOptions, { center: map.getCenter() });
             ttSearchBox.updateOptions(Object.assign({}, searchBoxOptions, {
-                placeholder: 'Query e.g. Washington',
+                placeholder: 'Query e.g. Accra',
                 searchOptions: newSearchOptions,
                 autocompleteOptions: newAutocompleteOptions,
                 distanceFromPoint: state.userLocation
