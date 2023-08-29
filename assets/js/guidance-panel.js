@@ -149,7 +149,7 @@ var guidancePanel = (function() {
                     guidanceMarkers[instructionNumber] =
                         new tt.Marker({ element: createMarkerElement('instruction', String(instructionNumber)) })
                             .setLngLat([instruction.point.longitude, instruction.point.latitude])
-                            .setPopup(new tt.Popup({ offset: 20 })
+                            .setPopup(new tt.Popup({className: 'popup-class', offset: 20, closeOnClick: false })
                                 .setHTML(createPopupHTML(createValidHTML(instruction.message))));
                 }
             });
@@ -240,7 +240,16 @@ var guidancePanel = (function() {
          on the map div to show the only the click div either at the top or bottom of the screen.
         on it there is a cloce or move back button where we click to send us back to the 
         general panel div and all other neccessary div hidden divs must also display */
-        function handleInstructionClick(position, index) {
+        function handleInstructionClick(position, index ) {
+            
+
+            // var selectedInstructionIndex = event.target.srcElement.getAttribute('data-number');
+            // console.log(selectedInstructionIndex)
+
+            // var selectedInstructionMarker = guidanceMarkers[selectedInstructionIndex];
+            //     selectedInstructionMarker.addTo(map);
+            //     selectedInstructionMarker.togglePopup();
+
             const generalGuidancePanel = document.querySelector('#instruction-tab');
             const sidePanelSearch = document.querySelector('#search');
             generalGuidancePanel.classList.toggle('active')
@@ -274,15 +283,21 @@ var guidancePanel = (function() {
             // }else{
             //     searchBox.classList.remove('active')
             // }
-
-                       // console.log(createValidHTML(guidance.instructions[index].message))
+            // console.log(createValidHTML(guidance.instructions[index].message))
             map.flyTo({ center: [position.longitude, position.latitude], duration: 500 }); 
             console.log(position) 
         }
 
         function handleInstructionHover(type, event) {
             var selectedInstructionIndex = event.target.getAttribute('data-number');
+            console.log(event)
+            console.log(type)
+            console.log(selectedInstructionIndex)
+
+
             var selectedInstructionMarker = guidanceMarkers[selectedInstructionIndex];
+            console.log(selectedInstructionMarker)
+
  
             if (type === 'enter') {
                 selectedInstructionMarker.addTo(map);
@@ -296,7 +311,7 @@ var guidancePanel = (function() {
         // events binding
         GuidancePanel.prototype.bindEvents = function() {
             [].slice.call(document.querySelectorAll('[class^="instructions-header-"]')).forEach(function(group, index) {
-                group.addEventListener('click', handleGroupHeaderClick.bind(null, index));
+                group.addEventListener('click', handleGroupHeaderClick.bind(null, index, ));
                 if (markersFactory) {
                     group.addEventListener('mouseenter', handleGroupHeaderHover.bind(null, 'enter'));
                     group.addEventListener('mouseleave', handleGroupHeaderHover.bind(null, 'leave'));
@@ -305,7 +320,7 @@ var guidancePanel = (function() {
             if (markersFactory) {
                 [].slice.call(document.querySelectorAll('.instruction')).forEach(function(instruction, index) {
                     instruction.addEventListener('click',
-                        handleInstructionClick.bind(null, guidance.instructions[index].point, index));
+                        handleInstructionClick.bind(null, guidance.instructions[index].point, index,));
                         console.log(guidance.instructions[index].point)
                     instruction.addEventListener('mouseenter', handleInstructionHover.bind(null, 'enter'));
                     instruction.addEventListener('mouseleave', handleInstructionHover.bind(null, 'leave'));
@@ -317,9 +332,9 @@ var guidancePanel = (function() {
                 });
         };
 
-        function handleGroupHeaderClick(index) {
+        function handleGroupHeaderClick(index, event) {
             var selectedGroupClassList = document.querySelector('.instructions-list-' + index).classList;
-
+             console.log(event)
             handleGroupIconPositionChange(index);
             selectedGroupClassList.toggle('not-visible');
             if (markersFactory) {

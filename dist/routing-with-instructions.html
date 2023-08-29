@@ -61,24 +61,24 @@
     <form id="hide" class='tt-side-panel js-form'>
         <header class='tt-side-panel__header'>
             <div class='input-wrapper'>
-                <div class="get-location" onclick="reserveValue()"><i class="fa-solid fa-location-crosshairs"></i></div>
+                <div class="get-location" onclick="reserveValue()"><i class="fa-solid fa-location-crosshairs" style="color: #2b4b41;"></i></div>
                 <!-- <div class='tt-icon icon-spacing -start'></div> -->
                 <div id='startSearchBox' class='tt-form-label searchbox'></div>
             </div>
             <div class='input-wrapper'>
-                <div><i class="fa-solid fa-road-barrier"></i></div>
+                <div><i class="fa-solid fa-road-barrier"  style="color: #2b4b41;"></i></div>
                 <!-- <div class='tt-icon icon-spacing -finish'></div> -->
                 <div id='finishSearchBox' class='tt-form-label searchbox'></div>
             </div>  
         </header>
-        <div id="toggleBtn"><i class="fa-solid fa-circle-xmark fa-lg" id="close-icon"></i></div>
+        <div id="toggleBtn"><i class="fa-solid fa-circle-xmark fa-lg" id="close-icon" ></i></div>
     </form>
 
    <div id='map' class='map-view'>
 
            
                 <div id="" class="click-popup-div">
-                    <div class="clear"><i class="fa-solid fa-arrow-rotate-left"></i></div>
+                    <div class="clear"><i id="clear-arrow" class="fa-solid fa-arrow-rotate-left"></i></div>
                     <div class="onclicked"></div>
                 </div>
 
@@ -87,18 +87,19 @@
                     
                        <div class="travel-option" onclick="TravelModeChange(car)" data-value="car"><i class="fa-solid fa-car-rear"></i></div>
                        <div class="travel-option" onclick="TravelModeChange(motor)" data-value="motorcycle"><i class="fa-solid fa-motorcycle"></i></div>
-                       <div class="travel-option" onclick="TravelModeChange(van)"  data-value="van"> <i class="fa-solid fa-motorcycle"></i></div>
-                       <div class="travel-option" onclick="TravelModeChange(bicycle)" data-value="bicycle"> <i class="fa-solid fa-person-biking"></i></div>
-                       <div class="travel-option" onclick="TravelModeChange(walk)" data-value="pedestrian"><i class="fa-solid fa-person-walking"></i></div>
-                        
+                       <div class="travel-option" onclick="TravelModeChange(van)"  data-value="van"><i class="fa-solid fa-truck-front"></i></div>
+                       <div class="travel-option" onclick="TravelModeChange(bicycle)" data-value="bicycle"><i class="fa-solid fa-person-biking"></i></div>
+                       <div class="travel-option" onclick="TravelModeChange(car)" data-value="pedestrian"><i class="fa-solid fa-person-walking"></i></div>
                        <div class="traffic-ellipse"><i class="fa-solid fa-ellipsis-vertical"></i></div>
+
                 </div>
+
               
                     <div class='traffic-layers'>
                         <input type='checkbox' class='tt-checkbox' id='incidents' checked='true'>
-                        <label class='tt-label' for="incidents"><i class="bi bi-stoplights"></i></label>
+                        <label class='tt-label' for="incidents"><i class="bi bi-stoplights" style="color: rgb(241, 43, 43);"></i></label>
                         <input type='checkbox' class='tt-checkbox' id='flow' checked='true'>
-                        <label class='tt-label' for="flow"><i class="bi bi-sign-stop-lights"></i></label>
+                        <label class='tt-label' for="flow"><i class="bi bi-sign-stop-lights" style="color: rgb(241, 43, 43);"></i></label>
                     </div>
                 
 
@@ -120,7 +121,7 @@
                     <div hidden="hidden"></div>
                     <div id="instruction-tab" class='tt-tabs' >
                         <div class="stepBox-close">
-                            <i class="fa-regular fa-circle-xmark"></i>
+                            <i id="step-close" class="fa-regular fa-circle-xmark"></i>
                         </div>
                         <div id=" " class='tt-tabs__panel js-tabs' hidden="hidden">
                             <div class='tt-results-list js-results' ></div>
@@ -149,7 +150,7 @@
                     </div>
                 </div>
                 <div  class="route-button" onclick="toggle()">
-                    <i id="route-direction" class="fa-solid fa-route"></i></div>
+                    <i class="fa-solid fa-route" style="color: #2b4b41;"></i></div>
             </div>   
             <div  class='full-map'></div>
   </div>
@@ -186,14 +187,19 @@
         }
 
         
-            let toggleBtn = document.querySelector('#toggleBtn');
-            toggleBtn.addEventListener('click', function(){
+        let toggleBtn = document.querySelector('#toggleBtn');
+        toggleBtn.addEventListener('click', function(){
                 let blurElement = document.querySelector('#map');
                 blurElement.classList.toggle('activeBlur');
                 // blurElement.classList.toggle(activeBlur)
                 let routePop = document.querySelector('#hide');
                 routePop.classList.toggle('active');
-            })
+        })
+
+        let trafficEllipse = document.querySelector('.traffic-ellipse');
+        trafficEllipse.addEventListener('click', ()=> {
+           document.querySelector('.traffic-layers').classList.toggle('active-traffic')
+        })
    
             let returnDiv = document.querySelector('.clear');
             returnDiv.addEventListener('click', function(){
@@ -216,6 +222,13 @@
             })
              
             document.querySelector('.step').addEventListener('click', ()=>{
+
+                const trafficLayer = document.querySelector('.traffic-layers');
+                // trafficLayer.classList.toggle('active-traffic') 
+                if(trafficLayer.classList.contains('active-traffic')){
+                    trafficLayer.classList.remove('active-traffic')
+                }
+
                 document.querySelector('.tt-tabs').classList.toggle('active')
                 const menu = document.querySelector('.menu')
                 if(menu.classList.contains('active-menu')){
@@ -225,7 +238,7 @@
                 const menuPanel = document.querySelector('.menu-panel')
                 if(  menuPanel.classList.contains('active-menu-panel')){
                     menuPanel.classList.remove('active-menu-panel')
-                }  
+                } 
             })
 
             document.querySelector('.stepBox-close').addEventListener('click', ()=>{
@@ -362,10 +375,10 @@
             var time;
 
 
-            const FullscreenControl = new tt.FullscreenControl({container: document.querySelector('body')})
-            const navigationControl = new tt.NavigationControl({})
-            map.addControl(FullscreenControl, 'bottom-right');
-            map.addControl(navigationControl);
+            // const FullscreenControl = new tt.FullscreenControl({container: document.querySelector('body')})
+            // const navigationControl = new tt.NavigationControl({})
+            // map.addControl(FullscreenControl, 'bottom-right');
+            // map.addControl(navigationControl);
 
             var observeMenuPanel = document.querySelector('.tt-tabs');
 

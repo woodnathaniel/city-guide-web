@@ -1,57 +1,20 @@
-/* .dashBoard{
-  width: 30%;
-  border-top-right-radius: 20px;
-  border-bottom-right-radius: 20px;
-  background-color: rgb(43, 44, 44);
-  display: inline;
+.traffic-layers.active-traffic{
+  visibility: visible;
 }
-.inline{
-  display: inline;
+
+.clear-arrow{
+  color: #2b4b41;
 }
+.clarr{
+  color: #2b4b41;
+}
+
 #close-icon{
-  padding: 10px;
-  font-size: 25px;
-  position: relative;
-  right: 0%;
-  bottom: 0%;
-  float: right;
-  margin-bottom: 10px;
-
+  color: brown;
 }
-
 #close-icon:hover{
-  cursor: pointer;
+  color: #f57048;
 }
-
-.btn{
-  position: fixed;
-  bottom: 20px;
-  left: 20px;
-  padding: 10px 20px;
-  background-color: #4CAF50;
-  color: white;
-  border: none;
-  border-radius: 4px;
-  cursor: pointer;
-  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
-  z-index: 1;
-}
-
-.map-view .option-container{
-  width: 150px;
-  height: 50px;
-  background-color: rgb(43, 44, 44);
-  z-index: 1;
-  left: 20px;
-  top: 10px;
-  border-radius: 20px;
-  margin-top: 10px;
-  margin-left: 20px;
-  /* align-items: center;
-  justify-content: center;
-  text-align: center; 
-  
-}*/
 
 .selected {
   background-color: lightblue;
@@ -76,12 +39,13 @@
   left: 50%;
   top: 20px;
   transform: translate(-50%, -50%);
-  gap: 15%;
-  align-items: center;
+  gap: 5%;
   box-shadow: 0 4px 24px 0 rgba(0, 0, 0, .16);
   z-index: 3;
   /* transition: 0.5s; */
   visibility: hidden;
+  font-size: 20px;
+  background-color: #2b4b41;
 }
 .menu-toggle{
  display: flex;
@@ -99,6 +63,7 @@
 .menu-panel{
   display: flex;
   flex-direction: row;
+  justify-content: center;
   align-items: center;
   gap: 20%;
   width: 20%;
@@ -108,13 +73,33 @@
   left: 50%;
   transform: translate(-50%, -50%);
   z-index: 3;
-  background-color: whitesmoke;
+  background-color:rgba(43, 75, 65, 0.98)  ;
   visibility: hidden;
-  width: 50%;
+  /* width: 50%; */
   border-top: #777 solid ;
   border-radius: 5px;
-
+  color: black;
+  padding: 20px;
 }
+
+i{
+  font-size: 20px;
+  color: whitesmoke;
+}
+p{
+  font-size: 15px;
+}
+
+#step-close{
+  color: brown;
+  font-size: 20px;
+}
+
+.popup-class{
+  background-color: rgb(104, 69, 69);
+  color: #cc2b02;
+}
+
 .menu-panel.active-menu-panel{
   visibility: visible;
 }
@@ -128,7 +113,7 @@
   border-radius: 5px;
   cursor: pointer;
   transition: 0.2s;
-  width: 200px;
+  /* width: 150px; */
   gap: 10px;
 }
 
@@ -141,7 +126,7 @@
   border-radius: 5px;
   cursor: pointer;
   transition: 0.2s;
-  width:150px;
+  /* width:150px; */
   
 }
 .step{
@@ -150,6 +135,13 @@
   cursor: pointer;
   display: flex;
   flex-direction: row;
+  align-items: center;
+  padding: 5px;
+  border-radius: 5px;
+  transition: 0.2s;
+  /* width:150px; */
+
+
 }
 
 .stepBox-close{
@@ -159,7 +151,7 @@
   right: 2%;
   align-items: center;
   font-size: 24px;
-  color: brown;
+  color: rgb(153, 41, 41);
   cursor: pointer;
   z-index: 3;
 
@@ -183,14 +175,8 @@
 }
 
 .traffic-ellipse{
-  padding: 5px;
   font-size: 20px;
-  color: whitesmoke;
-  background-color: #2b4b41;
-  left: 10%;
-  z-index: 3;
-  margin-left: 20px;
-  border-radius: 5px;
+  color: #2b4b41;
 }
 
 .distance-time:hover{
@@ -224,15 +210,25 @@ select:hover{
 .traffic-layers{
   display: flex;
   flex-direction: row;
-  gap: 70px;
+  align-items: center;
+  justify-content: center;
+  padding: 10px 2px 10px 2px;
+  gap: 50px;
   border-width: 0px;
   border-radius: 5px;
-  background-color: rgb(185, 185, 185);
-  padding: 5px;
+  background-color: #2b4b41;
   cursor: pointer;
   transition: 0.2s;
-  width: 180px;
+  width: 150px;
+  visibility: hidden;
+  z-index: 3;
+  position: absolute;
+  right: 20%;
+  top: 49px;
 }
+
+
+
 .layer-menu{
   background-color: rgb(185, 185, 185);
 
@@ -326,6 +322,7 @@ select:hover{
 visibility: visible;
 z-index: 2;
 }
+
 .clear{
   padding: 5px;
   /* width: 10px; */
@@ -346,4 +343,52 @@ z-index: 2;
 .tt-tabs__panel::-webkit-scrollbar-track{
   background-color: #fafafa;
   border-radius: 1px;
+}
+
+
+/* media querries max width*/
+
+@media screen and (max-width: 500px) {
+  .menu{
+    width: 100%;
+  }
+  .menu-panel{
+    width: 100%;
+    gap: 15%;
+    margin: 5px;
+  }
+  .tt-tabs{
+    width: 100%;
+    margin-left: 5px;
+    margin-right: 5px;
+    height: 100%;
+    
+  }
+
+  .traffic-layers{
+    right: 0;
+    flex-direction: column;
+    width: 0;
+    padding: 10px;
+  }
+
+}
+
+@media screen and (max-width: 768px) {
+
+  .traffic-layers{
+    right: 10%;
+    transform: .8s;
+    gap: 25px;
+  }
+  .menu-panel{
+    width: 80%;
+  }
+}
+
+@media screen and (max-width: 1024px){
+
+  .traffic-layers{
+    gap: 30px;
+  }
 }
