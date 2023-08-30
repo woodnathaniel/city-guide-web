@@ -1,11 +1,7 @@
 {
     "keys": {
-        "maps": "< maps key>",
-        "routing": "<routing key>",
-        "search": "<search key>",
-        "trafficIncidents": "<traffic incidents key>",
-        "trafficFlow": "<traffic flow key>",
-        "extendedSearch": "<extended search key>"
+        "maps": "GZ2CohvCdB2RplDFGwFCyCg8gWO0YSKQ",
+        "search": "GZ2CohvCdB2RplDFGwFCyCg8gWO0YSKQ"
     },
     "cdn": {
         "web-sdk-maps": "https://api.tomtom.com/maps-sdk-for-web/cdn/6.x/6.23.0/maps",
@@ -16,12 +12,8 @@
         "web-sdk-plugin-drawingtools": "https://api.tomtom.com/maps-sdk-for-web/cdn/plugins/DrawingTools/1.1.5/",
         "web-sdk-plugin-minimap": "https://api.tomtom.com/maps-sdk-for-web/cdn/plugins/Minimap/2.1.6/"
     },
-    "styles": {
-        "custom.incidents.markers.style": "${publicUrl}/pages/examples/assets/style/custom_incidents_style.json",
-        "custom.incidents.markers.sprite": "${publicUrl}/pages/examples/assets/style/custom_incidents_sprite"
-    },
     "productInfo": {
-        "name": "<product name>",
-        "version": "<product version>"
+        "name": "city-guide-web",
+        "version": "1.0"
     }
 }
