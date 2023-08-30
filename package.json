@@ -6,7 +6,7 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "build": "npm run build",
+    "build": "node scripts/copyToDist.js && node scripts/replacePlaceholders.js",
     "start": "live-server --open=dist/routing-with-instructions.html"
   },
   "author": "",
