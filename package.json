@@ -7,7 +7,7 @@
   "main": "index.js",
   "scripts": {
     "build": "node scripts/copyToDist.js && node scripts/replacePlaceholders.js",
-    "start": "live-server --open=dist/routing-with-instructions.html"
+    "start": "live-server --open=html/routing-with-instructions.html"
   },
   "author": "",
   "devDependencies": {
