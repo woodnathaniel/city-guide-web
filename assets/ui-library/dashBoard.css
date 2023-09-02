@@ -82,8 +82,8 @@
   padding: 20px;
 }
 
-i{
-  font-size: 20px;
+.iclr{
+  
   color: whitesmoke;
 }
 p{
@@ -171,7 +171,18 @@ p{
 
 .travel-option{
   border-radius: 50%;
+  color: whitesmoke;
   padding: 2%;
+  font-size: 20px;
+}
+
+.fa-solid{
+  color: #fafafa;
+  font-size: 20px;
+}
+.fa-arrow-rotate-left{
+  font-size: 20px;
+  color: black;
 }
 
 .traffic-ellipse{
