@@ -57,7 +57,7 @@
         }
     </style>
     <body>
-<div>
+<div class="refresh-container">
     <form id="hide" class='tt-side-panel js-form'>
         <header class='tt-side-panel__header'>
             <div class='input-wrapper'>
@@ -176,6 +176,33 @@
         <script data-showable type='text/javascript' src='../assets/js/search/searchbox-enter-submit.js'></script>
 
     <script>
+
+                
+      
+        const body = document.body;
+        // const content = document.querySelector('.content');
+        let startY = 0;
+
+        body.addEventListener('touchstart', (e) => {
+            startY = e.touches[0].clientY;
+            console.log('touched')
+            console.log(e)
+        });
+
+        body.addEventListener('touchmove', (e) => {
+            const currentY = e.touches[0].clientY;
+            const deltaY = currentY - startY;
+            console.log('nove')
+            console.log(e)
+
+            if (deltaY > 400) {
+                // User has pulled down enough, trigger full page refresh
+                // body.classList.add('refreshing');
+                e.view.location.reload();
+            }
+        });
+
+
 
        
        
@@ -302,6 +329,7 @@
                 key: 'GZ2CohvCdB2RplDFGwFCyCg8gWO0YSKQ',
                 container: 'map',
                 dragPan: !isMobileOrTablet(),
+                style: 'https://api.tomtom.com/style/2/custom/style/dG9tdG9tQEBAOHRHeUpsUmhDSlJoWGl0cTs1OTkxMWU1Yy05N2JhLTQ3YzItODljYS0wY2NjY2NiMmQxOGI=/drafts/0.json?key=GZ2CohvCdB2RplDFGwFCyCg8gWO0YSKQ',
                 stylesVisibility: {
                     trafficIncidents: true,
                     trafficFlow: true
