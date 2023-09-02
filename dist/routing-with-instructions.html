@@ -179,28 +179,30 @@
 
                 
       
-        const body = document.body;
-        // const content = document.querySelector('.content');
-        let startY = 0;
+// script.js
+const body = document.body;
+// const content = document.querySelector('.content');
+let startY = 0;
 
-        body.addEventListener('touchstart', (e) => {
-            startY = e.touches[0].clientY;
-            console.log('touched')
-            console.log(e)
-        });
+function handleStart(event) {
+  startY = event.clientY || event.touches[0].clientY;
+}
 
-        body.addEventListener('touchmove', (e) => {
-            const currentY = e.touches[0].clientY;
-            const deltaY = currentY - startY;
-            console.log('nove')
-            console.log(e)
+function handleMove(event) {
+  const currentY = event.clientY || event.touches[0].clientY;
+  const deltaY = currentY - startY;
 
-            if (deltaY > 400) {
-                // User has pulled down enough, trigger full page refresh
-                // body.classList.add('refreshing');
-                e.view.location.reload();
-            }
-        });
+  if (deltaY > 500) {
+   
+    location.reload();
+  }
+}
+
+body.addEventListener('mousedown', handleStart);
+body.addEventListener('touchstart', handleStart);
+
+body.addEventListener('mousemove', handleMove);
+body.addEventListener('touchmove', handleMove);
 
 
 
