@@ -6,8 +6,13 @@
   "description": "",
   "main": "index.js",
   "scripts": {
+<<<<<<< HEAD
     "build": "node scripts/copyToDist.js && node scripts/replacePlaceholders.js",
     "start": "start /routing-with-instructions.html"
+=======
+    "build": "npm run build",
+    "start": "live-server --open=dist/routing-with-instructions.html"
+>>>>>>> 2e6dd6843b99d7de9ca36f38588fc208480cc904
   },
   "author": "",
   "devDependencies": {
