@@ -179,30 +179,26 @@
 
                 
       
-// script.js
-const body = document.body;
-// const content = document.querySelector('.content');
-let startY = 0;
+        const body = document.body;
+        // const content = document.querySelector('.content');
+        let startY = 0;
 
-function handleStart(event) {
-  startY = event.clientY || event.touches[0].clientY;
-}
+        body.addEventListener('touchstart', (e) => {
+            startY = e.touches[0].clientY;
+            
+        });
 
-function handleMove(event) {
-  const currentY = event.clientY || event.touches[0].clientY;
-  const deltaY = currentY - startY;
+        body.addEventListener('touchmove', (e) => {
+            const currentY = e.touches[0].clientY;
+            const deltaY = currentY - startY;
+            
 
-  if (deltaY > 500) {
-   
-    location.reload();
-  }
-}
-
-body.addEventListener('mousedown', handleStart);
-body.addEventListener('touchstart', handleStart);
-
-body.addEventListener('mousemove', handleMove);
-body.addEventListener('touchmove', handleMove);
+            if (deltaY > 400) {
+                // User has pulled down enough, trigger full page refresh
+                // body.classList.add('refreshing');
+                e.view.location.reload();
+            }
+        });
 
 
 
