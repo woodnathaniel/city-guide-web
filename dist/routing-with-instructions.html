@@ -83,7 +83,17 @@
                 </div>
 
                
-                <div class="menu">
+                <!-- <div class="menu">
+                    <div class="menu-toggle">
+                        <div class="layer"></div>
+                        <div class="traffic-box">
+                            <i class="fa-solid fa-layer-group"></i>
+                            <div class="incident-box"></div>
+                            <div class="traffic"></div>
+                        </div> -->
+
+
+                    </div>
                     
                        <div class="travel-option" onclick="TravelModeChange(car)" data-value="car"><i class="fa-solid fa-car-rear"></i></div>
                        <div class="travel-option" onclick="TravelModeChange(motor)" data-value="motorcycle"><i class="fa-solid fa-motorcycle"></i></div>
@@ -177,7 +187,8 @@
 
     <script>
 
-                
+             
+        
       
         const body = document.body;
         // const content = document.querySelector('.content');
@@ -327,7 +338,7 @@
                 key: 'GZ2CohvCdB2RplDFGwFCyCg8gWO0YSKQ',
                 container: 'map',
                 dragPan: !isMobileOrTablet(),
-                style: 'https://api.tomtom.com/style/2/custom/style/dG9tdG9tQEBAOHRHeUpsUmhDSlJoWGl0cTs1OTkxMWU1Yy05N2JhLTQ3YzItODljYS0wY2NjY2NiMmQxOGI=/drafts/0.json?key=GZ2CohvCdB2RplDFGwFCyCg8gWO0YSKQ',
+                style: 'https://api.tomtom.com/style/2/custom/style/dG9tdG9tQEBAOHRHeUpsUmhDSlJoWGl0cTtlNTgxOGY2My04YWY4LTQxYjAtYTI0My0wZGVlZWMwYjIyMTA=/drafts/0.json?key=GZ2CohvCdB2RplDFGwFCyCg8gWO0YSKQ',
                 stylesVisibility: {
                     trafficIncidents: true,
                     trafficFlow: true
