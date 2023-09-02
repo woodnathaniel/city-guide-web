@@ -15,5 +15,5 @@ try {
 }
 
 //eslint-disable-next-line
-console.log("Copying html files to dist finished!");
+console.log("Copying html files to html finished!");
 

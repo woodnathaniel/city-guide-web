@@ -16,10 +16,10 @@ const keysRegexes = Object.keys(config.keys).reduce((acc, key) => {
 
 const hostedStylesRegex = new RegExp(`\\\${hostedStylesVersion}`, 'gm'); //eslint-disable-line
 
-// const styleRegexes = Object.keys(config.styles).reduce((acc, customStyle) => {
-//     acc[customStyle] = new RegExp(`\\\${styles.${customStyle}}`, 'gm');
-//     return acc;
-// }, {});
+const styleRegexes = Object.keys(config.styles).reduce((acc, customStyle) => {
+    acc[customStyle] = new RegExp(`\\\${styles.${customStyle}}`, 'gm');
+    return acc;
+}, {});
 
 const productInfoRegexes = Object.keys(config.productInfo).reduce((acc, key) => {
     acc[key] = new RegExp(`\\\${productInfo.${key}}`, 'gm');
@@ -29,6 +29,7 @@ const productInfoRegexes = Object.keys(config.productInfo).reduce((acc, key) => 
 const regexes = {
     ...cdnRegexes,
     ...keysRegexes,
+    ...styleRegexes,
     ...productInfoRegexes,
     hostedStylesVersion: hostedStylesRegex
 };
@@ -36,6 +37,7 @@ const regexes = {
 const values = {
     ...config.cdn,
     ...config.keys,
+    ...config.styles,
     ...config.productInfo,
     hostedStylesVersion: config.hostedStylesVersion
 };
