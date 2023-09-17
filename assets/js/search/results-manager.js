@@ -74,7 +74,10 @@ ResultsManager.prototype.success = function() {
     if(!searchBox.classList.contains('active')){
       searchBox.classList.add('active')
     }
-     
+    const mapLayer = document.querySelector('.layers')
+    if(!mapLayer.classList.contains('layer-toggle')){
+        mapLayer.classList.add('layer-toggle')
+    }
 
    
     // this.resultsElement.style.overflow = 'hidden';

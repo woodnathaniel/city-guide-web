@@ -57,11 +57,11 @@
         }
     </style>
     <body>
-<div class="refresh-container">
+   <div class="refresh-container">
     <form id="hide" class='tt-side-panel js-form'>
         <header class='tt-side-panel__header'>
             <div class='input-wrapper'>
-                <div class="get-location" onclick="reserveValue()"><i class="fa-solid fa-location-crosshairs" style="color: #2b4b41;"></i></div>
+                <div id="getLocationButton" class="get-location"><i class="fa-solid fa-location-crosshairs" style="color: #2b4b41;"></i></div>
                 <!-- <div class='tt-icon icon-spacing -start'></div> -->
                 <div id='startSearchBox' class='tt-form-label searchbox'></div>
             </div>
@@ -74,8 +74,17 @@
         <div id="toggleBtn"><i class="fa-solid fa-circle-xmark fa-lg" id="close-icon" ></i></div>
     </form>
 
-   <div id='map' class='map-view'>
+    <div id='map' class='map-view'>
 
+
+        <div class="toggle-menu"><i class="fa-solid fa-bars"></i></div>
+        <div class="layers" >
+            <div>Map Layers</div>
+            <div class="layer-option" data-value="https://api.tomtom.com/style/2/custom/style/dG9tdG9tQEBAOHRHeUpsUmhDSlJoWGl0cTtkYjZjOTlmYi0zNmZmLTQyYjgtYTZhZi02YzJlNzY1NTI3Y2I=/drafts/0.json?key=GZ2CohvCdB2RplDFGwFCyCg8gWO0YSKQ"><p class="layer-label"><i class="fa-solid fa-street-view"></i></p></div>
+            <div class="layer-option" data-value="https://api.tomtom.com/style/2/custom/style/dG9tdG9tQEBAOHRHeUpsUmhDSlJoWGl0cTtlNTgxOGY2My04YWY4LTQxYjAtYTI0My0wZGVlZWMwYjIyMTA=/drafts/0.json?key=GZ2CohvCdB2RplDFGwFCyCg8gWO0YSKQ"><p class="layer-label"><i class="fa-solid fa-satellite-dish"></i></p></div>
+        </div>
+
+       
            
                 <div id="" class="click-popup-div">
                     <div style="color: black;" class="clear"><i id="clear-arrow" class="fa-solid fa-arrow-rotate-left"></i></div>
@@ -83,15 +92,13 @@
                 </div>
 
                
-                <div class="menu">
-                    
-                       <div class="travel-option" onclick="TravelModeChange(car)" data-value="car"><i class="fa-solid fa-car-rear"></i></div>
-                       <div class="travel-option" onclick="TravelModeChange(motor)" data-value="motorcycle"><i class="fa-solid fa-motorcycle"></i></div>
-                       <div class="travel-option" onclick="TravelModeChange(van)"  data-value="van"><i class="fa-solid fa-truck-front"></i></div>
-                       <div class="travel-option" onclick="TravelModeChange(bicycle)" data-value="bicycle"><i class="fa-solid fa-person-biking"></i></div>
-                       <div class="travel-option" onclick="TravelModeChange(car)" data-value="pedestrian"><i class="fa-solid fa-person-walking"></i></div>
+                <div class="menu">  
+                       <div class="travel-option" data-value="car"><i class="fa-solid fa-car-rear"></i></div>
+                       <div class="travel-option" data-value="motorcycle"><i class="fa-solid fa-motorcycle"></i></div>
+                       <div class="travel-option" data-value="van"><i class="fa-solid fa-truck-front"></i></div>
+                       <div class="travel-option" data-value="bicycle"><i class="fa-solid fa-person-biking"></i></div>
+                       <div class="travel-option" data-value="pedestrian"><i class="fa-solid fa-person-walking"></i></div>
                        <div class="traffic-ellipse"><i class="fa-solid fa-ellipsis-vertical"></i></div>
-
                 </div>
 
               
@@ -100,6 +107,12 @@
                         <label class='tt-label' for="incidents"><i class="bi bi-stoplights" style="color: rgb(241, 43, 43);"></i></label>
                         <input type='checkbox' class='tt-checkbox' id='flow' checked='true'>
                         <label class='tt-label' for="flow"><i class="bi bi-sign-stop-lights" style="color: rgb(241, 43, 43);"></i></label>
+                        <!-- <div class="route-view-layers" >
+                            <div>Map Layers</div>
+                            <div class="layer-option" data-value="https://api.tomtom.com/style/2/custom/style/dG9tdG9tQEBAOHRHeUpsUmhDSlJoWGl0cTtkYjZjOTlmYi0zNmZmLTQyYjgtYTZhZi02YzJlNzY1NTI3Y2I=/drafts/0.json?key=GZ2CohvCdB2RplDFGwFCyCg8gWO0YSKQ"><p class="layer-label"><i class="fa-solid fa-street-view"></i></p></div>
+                            <div class="layer-option" data-value="https://api.tomtom.com/style/2/custom/style/dG9tdG9tQEBAOHRHeUpsUmhDSlJoWGl0cTtlNTgxOGY2My04YWY4LTQxYjAtYTI0My0wZGVlZWMwYjIyMTA=/drafts/0.json?key=GZ2CohvCdB2RplDFGwFCyCg8gWO0YSKQ"><p class="layer-label"><i class="fa-solid fa-satellite-dish"></i></p></div>
+                        </div> -->
+
                     </div>
                 
 
@@ -177,7 +190,55 @@
 
     <script>
 
+        // Request the user's location when a button is clicked
+        document.getElementById("getLocationButton").addEventListener("click", function() {
+        // Check if geolocation is available in the browser
+            if ("geolocation" in navigator) {
+                // Request the user's location
+                navigator.geolocation.getCurrentPosition(function(position) {
+                // Handle the location data here
+                 var latitude = position.coords.latitude;
+                 var longitude = position.coords.longitude;
                 
+
+                
+                    new tt.services.reverseGeocode({
+                            key: 'GZ2CohvCdB2RplDFGwFCyCg8gWO0YSKQ',
+                            position: `${longitude}, ${latitude}`,
+                            language: 'en-GB'
+                    }).then((response)=>{
+                        // searchBox.start.setValue(`${response.addresses.address[0].localName}`)
+                        console.log(response.addresses.address[0].localName)
+                    }) 
+
+
+                // Use the latitude and longitude for location-based tasks
+                }, function(error) {
+                // Handle any errors here
+                    console.error("Error getting location:", error.message);
+                });
+            } else {
+                // Geolocation is not supported in this environment
+                console.error("Geolocation is not available.");
+            }
+        });
+
+     
+           
+                       
+                       
+                    //    function getLocation(response){
+                            
+                            
+                    //         //             const location = document.querySelector('.get-location')
+                    //         //             location.addEventListener('click', () => {
+                    //         //               
+                    //         //             })
+                    //                }
+
+     
+
+
       
         const body = document.body;
         // const content = document.querySelector('.content');
@@ -246,6 +307,7 @@
                 if(!menu.classList.contains('menu-active')){
                    menu.classList.add('menu-active')
                 }
+                
             })
              
             document.querySelector('.step').addEventListener('click', ()=>{
@@ -282,7 +344,15 @@
                 } 
             })
 
+        // window.addEventListener('resize', ()=>{
+        //   const check =  document.querySelector('.menu-panel');
+        //   const toggle =  document.querySelector('.toggle-menu');
+        //   const screenWidth = window.innerWidth;
+        //   check.classList.contains('active-menu-panel') && screenWidth <= 500 ? toggle.classList.add('toggle-menu-active') && check.classList.remove('active-menu-panel') :  toggle.classList.remove('toggle-menu-active') && check.classList.add('active-menu-panel');
+        // })  
+
             let travelMode = 'van';
+            let layers = 'https://api.tomtom.com/style/2/custom/style/dG9tdG9tQEBAOHRHeUpsUmhDSlJoWGl0cTs2MDAzMzEzNS01MjJmLTRjOTEtOTJiZS03NjQ3OGU4MzM5Y2I=/drafts/0.json?key=lsWGbzvufAqYQdHCpV6HMVq3CCA0rYdz'
 
 
             var selectElement = document.querySelector('#traffic-layers');
@@ -291,24 +361,23 @@
             const travelOptions = document.querySelectorAll('.travel-option');
 
             travelOptions.forEach(travelOption => {
-               travelOption.addEventListener('click', () => {
-                // Remove 'selected' class from all items
-                travelOptions.forEach(item => {
-                  travelOption.classList.remove('selected');
+                travelOption.addEventListener('click', () => {
+                    // Remove 'selected' class from all items
+                    travelOptions.forEach(item => {
+                    travelOption.classList.remove('selected');
+                    });
+
+                    // Add 'selected' class to the clicked item
+                    travelOption.classList.add('selected');
+                    travelMode = travelOption.getAttribute('data-value')
+                    console.log(travelMode)
+                    handleDrawRoute();
                 });
-
-                // Add 'selected' class to the clicked item
-                travelOption.classList.add('selected');
-               travelMode = travelOption.getAttribute('data-value')
-               console.log(travelMode)
-               handleDrawRoute();
-            });
             });
 
+           
             
-            // function TravelModeChange(){
-                
-            // }
+           
 
             // function handleTravelModeChange(event) {
             //     travelMode = event.key;
@@ -327,15 +396,46 @@
                 key: 'GZ2CohvCdB2RplDFGwFCyCg8gWO0YSKQ',
                 container: 'map',
                 dragPan: !isMobileOrTablet(),
-                style: 'https://api.tomtom.com/style/2/custom/style/dG9tdG9tQEBAOHRHeUpsUmhDSlJoWGl0cTtlNTgxOGY2My04YWY4LTQxYjAtYTI0My0wZGVlZWMwYjIyMTA=/drafts/0.json?key=GZ2CohvCdB2RplDFGwFCyCg8gWO0YSKQ',
+                style: layers,
+                language: 'en-GB',
+                pitch: 0,
+                bearing: 0,
+                trackSize: true, 
                 stylesVisibility: {
                     trafficIncidents: true,
-                    trafficFlow: true
+                    trafficFlow: true,
                 },
-                trackSize: true,            
+                scrollZoom: {
+                    around: 'center'
+                },
+                touchZoomRotate: {
+                    around: 'center'
+                }  
+
+            });
+            // trafficFlow: 'vectorTilesFlow',
+            //         trafficIncidents: 'vectorTilesIncidents',
+
+           
+
+            map.addControl(new tt.NavigationControl({
+                showPitch: true,
+                showExtendedRotationControls: true,
+                showExtendedPitchControls: true
+            }));
+
+            const layersOptions = document.querySelectorAll('.layer-option');
+
+            layersOptions.forEach(layerOption => {
+                layerOption.addEventListener('click', () => {
+                    layers = layerOption.getAttribute('data-value')
+                  map.setStyle(layers)
+                });
             });
 
-            console.log(map)
+            // map.touchPitch.enable({ around: 'right' });
+            // map.scrollZoom.enable({ around: 'right' });
+            // map.doubleClickZoom.enable();
             
             document.querySelector('#flow').addEventListener('change', function(event) {
                 if (event.target.checked) {
@@ -380,7 +480,7 @@
             // };
 
 
-            console.log(travelMode)
+            
 
             // map.showTrafficFlow()
             // map.on('load', function() {
@@ -421,10 +521,12 @@
                         if (observeMenuPanel.classList.contains('active')) {
                             map.removeControl(FullscreenControl);
                             map.removeControl(navigationControl);
+                            document.querySelector('.layers').classList.add('layer-toggle')
                         }
                         else{
                             map.addControl(FullscreenControl, 'bottom-right');
                             map.addControl(navigationControl);
+                            document.querySelector('.layers').classList.remove('layer-toggle')
                         }
                     }
                 }
@@ -440,46 +542,43 @@
             });
             
 
-            function reserveValue(){
-
-                var geolocateControl = new tt.GeolocateControl({
-                    positionOptions: {
-                        enableHighAccuracy: true
-                    },
-                    fitBoundsOptions:{maxZoom:0},
-                    showAccuracyCircle: false,
-                    showUserLocation: false,
-                    trackUserLocation: true
-                });
-
-                geolocateControl.on('geolocate', function(event) {
-
-                   
-                       const lng= event.coords.longitude
-                       const lat= event.coords.latitude
-                    
-                    
-
-                });
-
-                new tt.services.reverseGeocode({
-                    key: 'GZ2CohvCdB2RplDFGwFCyCg8gWO0YSKQ',
-                    position: `${lng}, ${lat}`,
-                    language: 'en-GB'
-                }).then((response)=>{
-                    getLocation(response)
-                })
-
-                function getLocation(response){
-                    createSearchBoxStart()
-                    
-                    const location = document.querySelector('.get-location')
-                    location.addEventListener('click', () => {
-                        createSearchBoxStart().setValue(`${response.addresses.address[0].localName}`)
-                    })
-                }
             
-            }
+
+                // var geolocateControl = new tt.GeolocateControl({
+                //     positionOptions: {
+                //         enableHighAccuracy: true
+                //     },
+                //     fitBoundsOptions:{maxZoom:0},
+                //     showAccuracyCircle: false,
+                //     showUserLocation: false,
+                //     trackUserLocation: true
+                // });
+
+                // geolocateControl.on('geolocate', function(event) {
+                //        const lng= event.coords.longitude
+                //        const lat= event.coords.latitude
+
+                //             new tt.services.reverseGeocode({
+                //             key: 'GZ2CohvCdB2RplDFGwFCyCg8gWO0YSKQ',
+                //             position: `${lng}, ${lat}`,
+                //             language: 'en-GB'
+                //         }).then((response)=>{
+                //             getLocation(response)
+                //         })
+
+                //         function getLocation(response){
+                            
+                            
+                //             const location = document.querySelector('.get-location')
+                //             location.addEventListener('click', () => {
+                //                 searchBox.start.setValue(`${response.addresses.address[0].localName}`)
+                //             })
+                //         }
+                // });
+
+            
+            
+            
 
             
             
@@ -726,6 +825,9 @@
             function onResultSelected(result, type) {
                 var position = result.position;
 
+
+
+
                 updateMapView(type, position);
             }
 
@@ -833,7 +935,6 @@ const routeBtn = document.getElementById('route-direction');
             
         });
 
-        console.log(geolocateControl);
         geolocateControl.on('geolocate', function(event) {
             var coordinates = event.coords;
             console.log(event)
