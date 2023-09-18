@@ -92,6 +92,17 @@
   padding: 5px;
 }
 
+.layers-map{
+  display: flex;
+  position: absolute;
+  right: 10px;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  border-left: solid rgb(102, 8, 8) 1px;
+  padding-left: 5px ;
+}
+
 .layer-toggle{
  visibility: hidden;
 }
@@ -263,8 +274,8 @@ select:hover{
 .traffic-layers{
   display: flex;
   flex-direction: row;
-  align-items: center;
-  justify-content: center;
+  /* align-items: center;
+  justify-content: center; */
   padding: 10px 2px 10px 2px;
   gap: 50px;
   border-width: 0px;
@@ -272,12 +283,21 @@ select:hover{
   background-color: #415e55;
   cursor: pointer;
   transition: 0.2s;
-  width: 150px;
+  width: 300px;
+  height: 150px;
   visibility: hidden;
   z-index: 3;
   position: absolute;
   right: 20%;
-  top: 49px;
+  top: 52px;
+}
+
+.traffic{
+  display: flex;
+  position: absolute;
+  left: 10px;
+  flex-direction: row;
+  gap: 60px;
 }
 
 .route-view-layers{
@@ -300,7 +320,7 @@ select:hover{
 }
 
 .traffic-layers:hover{
-  background-color: rgba(185, 185, 185, 0.8);
+  background-color: rgba(0, 35, 36, 0.8);
 }
 
 
@@ -422,14 +442,14 @@ select:hover{
     width: 100%;
     margin-left: 5px;
     margin-right: 5px;
-    height: 100%;
+    height: 80%;
     
   }
 
   .traffic-layers{
     right: 0;
     flex-direction: column;
-    width: 0;
+    width: 80%;
     padding: 10px;
   }
 }
@@ -442,7 +462,8 @@ select:hover{
     gap: 25px;
   }
   .menu-panel{
-    width: 80%;
+    width: 100%;
+    
   }
 }
 

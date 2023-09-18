@@ -103,15 +103,18 @@
 
               
                     <div class='traffic-layers'>
-                        <input type='checkbox' class='tt-checkbox' id='incidents' checked='true'>
-                        <label class='tt-label' for="incidents"><i class="bi bi-stoplights" style="color: rgb(241, 43, 43);"></i></label>
-                        <input type='checkbox' class='tt-checkbox' id='flow' checked='true'>
-                        <label class='tt-label' for="flow"><i class="bi bi-sign-stop-lights" style="color: rgb(241, 43, 43);"></i></label>
-                        <!-- <div class="route-view-layers" >
+                        <div class="traffic">
+                            <input type='checkbox' class='tt-checkbox' id='incidents' checked='true'>
+                            <label class='tt-label' for="incidents"><i class="bi bi-stoplights" style="color: rgb(241, 43, 43);"></i>Traffic Incidents</label>
+                            <input type='checkbox' class='tt-checkbox' id='flow' checked='true'>
+                            <label class='tt-label' for="flow"><i class="bi bi-sign-stop-lights" style="color: rgb(241, 43, 43);">Traffic Flow</i></label>
+                        </div>
+                       
+                        <div class="layers-map">
                             <div>Map Layers</div>
                             <div class="layer-option" data-value="https://api.tomtom.com/style/2/custom/style/dG9tdG9tQEBAOHRHeUpsUmhDSlJoWGl0cTtkYjZjOTlmYi0zNmZmLTQyYjgtYTZhZi02YzJlNzY1NTI3Y2I=/drafts/0.json?key=GZ2CohvCdB2RplDFGwFCyCg8gWO0YSKQ"><p class="layer-label"><i class="fa-solid fa-street-view"></i></p></div>
                             <div class="layer-option" data-value="https://api.tomtom.com/style/2/custom/style/dG9tdG9tQEBAOHRHeUpsUmhDSlJoWGl0cTtlNTgxOGY2My04YWY4LTQxYjAtYTI0My0wZGVlZWMwYjIyMTA=/drafts/0.json?key=GZ2CohvCdB2RplDFGwFCyCg8gWO0YSKQ"><p class="layer-label"><i class="fa-solid fa-satellite-dish"></i></p></div>
-                        </div> -->
+                        </div>
 
                     </div>
                 
@@ -187,8 +190,24 @@
         <script data-showable type='text/javascript' src='../assets/js/search/results-manager-search.js'></script>
         <script data-showable type='text/javascript' src='../assets/js/guidance-panel.js'></script>
         <script data-showable type='text/javascript' src='../assets/js/search/searchbox-enter-submit.js'></script>
+        <script src="https://unpkg.com/leaflet@1.7.1/dist/leaflet.js"></script>
 
     <script>
+
+
+        if(!navigator.geolocation) {
+                console.log("Your browser doesn't support geolocation feature!")
+            } else {
+                
+                    navigator.geolocation.getCurrentPosition(getPosition)
+               
+            }
+        function getPosition(position){
+            console.log(position)
+            var lat = position.coords.latitude
+            var long = position.coords.longitude
+            var accuracy = position.coords.accuracy
+        }
 
         // Request the user's location when a button is clicked
         document.getElementById("getLocationButton").addEventListener("click", function() {
@@ -257,6 +276,7 @@
             if (deltaY > 400) {
                 // User has pulled down enough, trigger full page refresh
                 // body.classList.add('refreshing');
+                console.log(e)
                 e.view.location.reload();
             }
         });
@@ -422,7 +442,7 @@
                 showPitch: true,
                 showExtendedRotationControls: true,
                 showExtendedPitchControls: true
-            }));
+            }), 'top-right');
 
             const layersOptions = document.querySelectorAll('.layer-option');
 
@@ -665,7 +685,7 @@
                         key: 'lsWGbzvufAqYQdHCpV6HMVq3CCA0rYdz'
                     },
                     labels: {
-                        placeholder: 'Query your Destination Location'
+                        placeholder: 'Query your Destination'
                     }
                 });
 
