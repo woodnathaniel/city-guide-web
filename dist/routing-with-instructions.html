@@ -372,7 +372,7 @@
         // })  
 
             let travelMode = 'van';
-            let layers = 'https://api.tomtom.com/style/2/custom/style/dG9tdG9tQEBAOHRHeUpsUmhDSlJoWGl0cTs2MDAzMzEzNS01MjJmLTRjOTEtOTJiZS03NjQ3OGU4MzM5Y2I=/drafts/0.json?key=lsWGbzvufAqYQdHCpV6HMVq3CCA0rYdz'
+            let layers = 'https://api.tomtom.com/style/2/custom/style/dG9tdG9tQEBAOHRHeUpsUmhDSlJoWGl0cTs0MTdlOTA5ZC1hZTczLTRkMjktODNiMy1iYzZmYjA1YjllMmE=/drafts/0.json?key=lsWGbzvufAqYQdHCpV6HMVq3CCA0rYdz'
 
 
             var selectElement = document.querySelector('#traffic-layers');
@@ -419,8 +419,7 @@
                 style: layers,
                 language: 'en-GB',
                 pitch: 0,
-                bearing: 0,
-                trackSize: true, 
+                bearing: 0, 
                 stylesVisibility: {
                     trafficIncidents: true,
                     trafficFlow: true,
@@ -433,6 +432,8 @@
                 }  
 
             });
+
+            // trackSize: true,
             // trafficFlow: 'vectorTilesFlow',
             //         trafficIncidents: 'vectorTilesIncidents',
 
