@@ -415,7 +415,7 @@
             var map = tt.map({
                 key: 'GZ2CohvCdB2RplDFGwFCyCg8gWO0YSKQ',
                 container: 'map',
-                dragPan: true,
+                dragPan: !isMobileOrTablet(),
                 trackSize: true,
                 style: layers,
                 language: 'en-GB',
@@ -434,7 +434,7 @@
 
             });
 
-            !isMobileOrTablet(),
+            
             // trafficFlow: 'vectorTilesFlow',
             //         trafficIncidents: 'vectorTilesIncidents',
 
