@@ -420,6 +420,7 @@
                 language: 'en-GB',
                 pitch: 0,
                 bearing: 0, 
+            
                 stylesVisibility: {
                     trafficIncidents: true,
                     trafficFlow: true,
@@ -844,10 +845,6 @@
 
             function onResultSelected(result, type) {
                 var position = result.position;
-
-
-
-
                 updateMapView(type, position);
             }
 
@@ -856,6 +853,7 @@
                     key: 'GZ2CohvCdB2RplDFGwFCyCg8gWO0YSKQ',
                     instructionsType: 'tagged',
                     traffic: true,
+                    zoom: 15,
                     locations: routePoints.start.join() + ':' + routePoints.finish.join(),
                     travelMode: travelMode,
                 });

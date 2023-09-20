@@ -205,7 +205,7 @@ p{
   padding: 10px;
   display: flex;
   position: absolute;
-  right: 2%;
+  right: 10%;
   align-items: center;
   font-size: 24px;
   color: rgb(153, 41, 41);
@@ -273,6 +273,10 @@ select:hover{
 .layer-menu{
   display: flex;
   flex-direction: row;
+}
+
+.layer-option{
+  border-bottom: black solid 1px;
 }
 
 .traffic-layers{
@@ -436,6 +440,8 @@ select:hover{
 @media screen and (max-width: 500px) {
   .menu{
     width: 100%;
+    gap: 15px;
+
   }
   .menu-panel{
     width: 100%;
