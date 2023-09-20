@@ -415,7 +415,6 @@
             var map = tt.map({
                 key: 'GZ2CohvCdB2RplDFGwFCyCg8gWO0YSKQ',
                 container: 'map',
-                dragPan: isMobileOrTablet(),
                 trackSize: true,
                 style: layers,
                 language: 'en-GB',
@@ -438,7 +437,7 @@
             // trafficFlow: 'vectorTilesFlow',
             //         trafficIncidents: 'vectorTilesIncidents',
 
-           
+            map.dragPan.enable()
 
             map.addControl(new tt.NavigationControl({
                 showPitch: true,
@@ -761,7 +760,6 @@
                 guidancePanel.bindEvents();
                 
                 var routeColors = ['#4a90e2', '#666666', '#666666']
-                
                     map.addLayer({
                         'id': 'route' ,
                         'type': 'line',
