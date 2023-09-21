@@ -195,55 +195,67 @@
     <script>
 
 
-        if(!navigator.geolocation) {
-                console.log("Your browser doesn't support geolocation feature!")
-            } else {
+        // if(!navigator.geolocation) {
+        //         console.log("Your browser doesn't support geolocation feature!")
+        //     } else {
                 
-                    navigator.geolocation.getCurrentPosition(getPosition)
+        //             navigator.geolocation.getCurrentPosition(getPosition)
                
-            }
-        function getPosition(position){
-            console.log(position)
-            var lat = position.coords.latitude
-            var long = position.coords.longitude
-            var accuracy = position.coords.accuracy
+        //     }
+
+
+        var checkRequest = true
+        function markerFunction(lng, lat){
+         var marker = new tt.Marker()
+                .setLngLat([lng, lat])
+                .addTo(map);
         }
 
         // Request the user's location when a button is clicked
         document.getElementById("getLocationButton").addEventListener("click", function() {
-        // Check if geolocation is available in the browser
-            if ("geolocation" in navigator) {
-                // Request the user's location
-                navigator.geolocation.getCurrentPosition(function(position) {
-                // Handle the location data here
-                 var latitude = position.coords.latitude;
-                 var longitude = position.coords.longitude;
-                
-
-                
-                    new tt.services.reverseGeocode({
-                            key: 'GZ2CohvCdB2RplDFGwFCyCg8gWO0YSKQ',
-                            position: `${longitude}, ${latitude}`,
-                            language: 'en-GB'
-                    }).then((response)=>{
-                        // searchBox.start.setValue(`${response.addresses.address[0].localName}`)
-                        console.log(response.addresses.address[0].localName)
-                    }) 
-
-
-                // Use the latitude and longitude for location-based tasks
-                }, function(error) {
-                // Handle any errors here
-                    console.error("Error getting location:", error.message);
-                });
-            } else {
-                // Geolocation is not supported in this environment
-                console.error("Geolocation is not available.");
-            }
+        
+           checkRequest = !checkRequest
+          
         });
 
-     
+        
+            if(checkRequest){
+                setTimeout(function(){
+                    if ("geolocation" in navigator) {
+                        // Request the user's location
+                     navigator.geolocation.getCurrentPosition(function(position) {
+                        // Handle the location data here
+                        var latitude = position.coords.latitude;
+                        var longitude = position.coords.longitude;
+                        
+
+                        markerFunction(longitude, latitude);
+
+                            // new tt.services.reverseGeocode({
+                            //         key: 'GZ2CohvCdB2RplDFGwFCyCg8gWO0YSKQ',
+                            //         position: `${longitude}, ${latitude}`,
+                            //         language: 'en-GB'
+                            // }).then((response)=>{
+                            //     // searchBox.start.setValue(`${response.addresses.address[0].localName}`)
+                            //     console.log(response.addresses.address[0].localName)
+                            // }) 
+
+
+                        // Use the latitude and longitude for location-based tasks
+                     }, function(error) {
+                        // Handle any errors here
+                            console.error("Error getting location:", error.message);
+                        }
+                    );
+                    } else {
+                        // Geolocation is not supported in this environment
+                        console.error("Geolocation is not available.");
+                    }
            
+                }, 120000)
+            }
+           
+      
                        
                        
                     //    function getLocation(response){
@@ -650,7 +662,7 @@
                 return new tt.Marker({ draggable: true, element: markerElement })
                     .setLngLat(lngLat)
                     .addTo(map)
-                    .on('dragend', getDraggedMarkerPosition.bind(null, type));
+                    // .on('dragend', getDraggedMarkerPosition.bind(null, type));
             }
 
             function createSearchBoxStart(type) {
