@@ -228,7 +228,8 @@
 
         
             if(checkRequest){
-                setTimeout(function(){
+                setInterval(() => {
+                
                     if ("geolocation" in navigator) {
                         // Request the user's location
                      navigator.geolocation.getCurrentPosition(function(position) {
@@ -260,9 +261,13 @@
                         // Geolocation is not supported in this environment
                         console.error("Geolocation is not available.");
                     }
-           
-                }, 30000)
+                
+                }, 30000);
             }
+
+            
+                
+            
            
       
                        
