@@ -309,6 +309,49 @@ select:hover{
   gap: 60px;
 }
 
+.color-code-Panel{
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  padding: 22px;
+  padding-top: 50px;
+  z-index: 4;
+  gap: 50px;
+  background-color: white;
+  height: fit-content;
+  position: absolute;
+  left: 10px;
+  top: 50%;
+}
+.close-color-code-panel{
+  display: flex;
+  position: absolute;
+  right: 10px;
+  top: 5px;
+  cursor: pointer;
+  font-size: 15px;
+}
+
+#code-close-icon{
+  color: black;
+  cursor: pointer;
+}
+.fast-traffic{
+  background-color: #2b4b41;
+  width: 5px;
+  height: 25px;
+}
+.medium-traffic{
+  background-color: #f57048;
+  width: 5px;
+  height: 25px;
+}
+.slow-traffic{
+  background-color: #cc2b02;
+  width: 5px;
+  height: 25px;
+}
+
 .route-view-layers{
   display: flex;
   flex-direction: column;

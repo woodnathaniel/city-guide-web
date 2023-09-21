@@ -86,10 +86,18 @@
 
        
            
-                <div id="" class="click-popup-div">
-                    <div style="color: black;" class="clear"><i id="clear-arrow" class="fa-solid fa-arrow-rotate-left"></i></div>
-                    <div class="onclicked"></div>
-                </div>
+        <div id="" class="click-popup-div">
+          <div style="color: black;" class="clear"><i id="clear-arrow" class="fa-solid fa-arrow-rotate-left"></i></div>
+          <div class="onclicked"></div>
+        </div>
+
+        <!-- Traffic Layer color code Panel -->
+        <!-- <div class="color-code-Panel">
+            <div class="close-color-code-panel"><i id="code-close" class="fa-solid fa-circle-xmark"></i></div>
+            <div><div class="fast-traffic"></div></div>
+            <div><div class="medium-traffic"></div></div>
+            <div><div class="slow-traffic"></div></div>
+        </div> -->
 
                
                 <div class="menu">  
@@ -230,6 +238,7 @@
                         
 
                         markerFunction(longitude, latitude);
+                        alert(longitude, latitude);
 
                             // new tt.services.reverseGeocode({
                             //         key: 'GZ2CohvCdB2RplDFGwFCyCg8gWO0YSKQ',
