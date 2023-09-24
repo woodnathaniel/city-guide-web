@@ -1,6 +1,7 @@
 tippy('#route-tooltip-icon',{
   content: 'click for your fastes route',
-  arrow: false
+  arrow: false,
+  inertia: true
 });
 
 // tippy('.layers-map',{
