@@ -77,11 +77,11 @@
     <div id='map' class='map-view'>
 
 
-        <div class="toggle-menu"><i class="fa-solid fa-bars"></i></div>
+        <!-- <div class="toggle-menu"><i class="fa-solid fa-bars"></i></div> -->
         <div class="layers" >
             <div>Map Layers</div>
-            <div class="layer-option" style="cursor: pointer;" data-value="https://api.tomtom.com/style/2/custom/style/dG9tdG9tQEBAOHRHeUpsUmhDSlJoWGl0cTtkYjZjOTlmYi0zNmZmLTQyYjgtYTZhZi02YzJlNzY1NTI3Y2I=/drafts/0.json?key=GZ2CohvCdB2RplDFGwFCyCg8gWO0YSKQ"><p class="layer-label"><i class="fa-solid fa-street-view"></i></p></div>
-            <div class="layer-option" style="cursor: pointer;" data-value="https://api.tomtom.com/style/2/custom/style/dG9tdG9tQEBAOHRHeUpsUmhDSlJoWGl0cTtlNTgxOGY2My04YWY4LTQxYjAtYTI0My0wZGVlZWMwYjIyMTA=/drafts/0.json?key=GZ2CohvCdB2RplDFGwFCyCg8gWO0YSKQ"><p class="layer-label"><i class="fa-solid fa-satellite-dish"></i></p></div>
+            <div id="open-street-view" class="layer-option" style="cursor: pointer;" data-value="https://api.tomtom.com/style/2/custom/style/dG9tdG9tQEBAOHRHeUpsUmhDSlJoWGl0cTtkYjZjOTlmYi0zNmZmLTQyYjgtYTZhZi02YzJlNzY1NTI3Y2I=/drafts/0.json?key=GZ2CohvCdB2RplDFGwFCyCg8gWO0YSKQ"><p class="layer-label"><i class="fa-solid fa-street-view menu-icon"></i></p></div>
+            <div id="open-satelite-view" class="layer-option" style="cursor: pointer;" data-value="https://api.tomtom.com/style/2/custom/style/dG9tdG9tQEBAOHRHeUpsUmhDSlJoWGl0cTtlNTgxOGY2My04YWY4LTQxYjAtYTI0My0wZGVlZWMwYjIyMTA=/drafts/0.json?key=GZ2CohvCdB2RplDFGwFCyCg8gWO0YSKQ"><p class="layer-label"><i class="fa-solid fa-satellite-dish menu-icon"></i></p></div>
         </div>
 
        
@@ -92,21 +92,23 @@
         </div>
 
         <!-- Traffic Layer color code Panel -->
-        <!-- <div class="color-code-Panel">
+        <div class="color-code-Panel">
             <div class="close-color-code-panel"><i id="code-close" class="fa-solid fa-circle-xmark"></i></div>
             <div><div class="fast-traffic"></div></div>
             <div><div class="medium-traffic"></div></div>
             <div><div class="slow-traffic"></div></div>
-        </div> -->
+            <img class="symbol" src="../assets/images/close-symbol.png" alt="">
+            <img class="symbol" src="../assets/images/line.png" alt="">
+        </div>
 
                
                 <div class="menu">  
-                       <div class="travel-option" data-value="car"><i class="fa-solid fa-car-rear"></i></div>
-                       <div class="travel-option" data-value="motorcycle"><i class="fa-solid fa-motorcycle"></i></div>
-                       <div class="travel-option" data-value="van"><i class="fa-solid fa-truck-front"></i></div>
-                       <div class="travel-option" data-value="bicycle"><i class="fa-solid fa-person-biking"></i></div>
-                       <div class="travel-option" data-value="pedestrian"><i class="fa-solid fa-person-walking"></i></div>
-                       <div class="traffic-ellipse"><i class="fa-solid fa-ellipsis-vertical"></i></div>
+                       <div id="car" class="travel-option" data-value="car"><i  class="fa-solid fa-car-rear menu-icon"></i></div>
+                       <div id="motorcycle" class="travel-option" data-value="motorcycle"><i class="fa-solid fa-motorcycle menu-icon"></i></div>
+                       <div id="van" class="travel-option" data-value="van"><i class="fa-solid fa-truck-front menu-icon"></i></div>
+                       <div id="bicycle" class="travel-option" data-value="bicycle"><i class="fa-solid fa-person-biking menu-icon"></i></div>
+                       <div id="walk" class="travel-option" data-value="pedestrian"><i class="fa-solid fa-person-walking menu-icon"></i></div>
+                       <div id="more" class="traffic-ellipse"><i class="fa-solid fa-ellipsis-vertical menu-icon"></i></div>
                 </div>
 
               
@@ -120,8 +122,8 @@
                        
                         <div class="layers-map">
                             <div>Map Layers</div>
-                            <div class="layer-option" style="cursor: pointer;" data-value="https://api.tomtom.com/style/2/custom/style/dG9tdG9tQEBAOHRHeUpsUmhDSlJoWGl0cTtkYjZjOTlmYi0zNmZmLTQyYjgtYTZhZi02YzJlNzY1NTI3Y2I=/drafts/0.json?key=GZ2CohvCdB2RplDFGwFCyCg8gWO0YSKQ"><p class="layer-label"><i class="fa-solid fa-street-view"></i></p></div>
-                            <div class="layer-option" style="cursor: pointer;" data-value="https://api.tomtom.com/style/2/custom/style/dG9tdG9tQEBAOHRHeUpsUmhDSlJoWGl0cTtlNTgxOGY2My04YWY4LTQxYjAtYTI0My0wZGVlZWMwYjIyMTA=/drafts/0.json?key=GZ2CohvCdB2RplDFGwFCyCg8gWO0YSKQ"><p class="layer-label"><i class="fa-solid fa-satellite-dish"></i></p></div>
+                            <div class="layer-option" style="cursor: pointer;" data-value="https://api.tomtom.com/style/2/custom/style/dG9tdG9tQEBAOHRHeUpsUmhDSlJoWGl0cTtkYjZjOTlmYi0zNmZmLTQyYjgtYTZhZi02YzJlNzY1NTI3Y2I=/drafts/0.json?key=GZ2CohvCdB2RplDFGwFCyCg8gWO0YSKQ"><p class="layer-label"><i class="fa-solid fa-street-view menu-icon"></i></p></div>
+                            <div class="layer-option" style="cursor: pointer;" data-value="https://api.tomtom.com/style/2/custom/style/dG9tdG9tQEBAOHRHeUpsUmhDSlJoWGl0cTtlNTgxOGY2My04YWY4LTQxYjAtYTI0My0wZGVlZWMwYjIyMTA=/drafts/0.json?key=GZ2CohvCdB2RplDFGwFCyCg8gWO0YSKQ"><p class="layer-label"><i class="fa-solid fa-satellite-dish menu-icon"></i></p></div>
                         </div>
 
                     </div>
@@ -129,15 +131,15 @@
 
                 <div class="menu-panel">
                     <div class="distanceBox">
-                        <i class="fa-solid fa-ruler-horizontal"></i>
+                        <i class="fa-solid fa-ruler-horizontal menu-icon"></i>
                         <p class="distance"></p>
                     </div>
                     <div class="timeBox">
-                        <i class="fa-solid fa-clock"></i>
+                        <i class="fa-solid fa-clock menu-icon"></i>
                         <p class="time"></p>
                     </div>
                     <div class="step">
-                        <i class="fa-solid fa-bars step-icon"></i>
+                        <i class="fa-solid fa-bars step-icon menu-icon"></i>
                     </div>
                 </div>
                 
@@ -173,7 +175,7 @@
                         <div class='tt-tabs__placeholder js-results-placeholder-search'>hey there</div>
                     </div>
                 </div>
-                <div  class="route-button" onclick="toggle()">
+                <div id="route-tooltip-icon" class="route-button" onclick="toggle()">
                     <i class="fa-solid fa-route" style="color: #2b4b41;"></i></div>
             </div>   
             <div  class='full-map'></div>
@@ -198,7 +200,9 @@
         <script data-showable type='text/javascript' src='../assets/js/search/results-manager-search.js'></script>
         <script data-showable type='text/javascript' src='../assets/js/guidance-panel.js'></script>
         <script data-showable type='text/javascript' src='../assets/js/search/searchbox-enter-submit.js'></script>
-        <script src="https://unpkg.com/leaflet@1.7.1/dist/leaflet.js"></script>
+        <script src="https://unpkg.com/popper.js@1"></script>
+        <script src="https://unpkg.com/tippy.js@5"></script>
+        <script src="../assets/js/tool-tip.js"></script>
 
     <script>
 
@@ -212,58 +216,58 @@
         //     }
 
 
-        var checkRequest = true
-        function markerFunction(lng, lat){
-         var marker = new tt.Marker()
-                .setLngLat([lng, lat])
-                .addTo(map);
-        }
+        // var checkRequest = true
+        // function markerFunction(lng, lat){
+        //  var marker = new tt.Marker()
+        //         .setLngLat([lng, lat])
+        //         .addTo(map);
+        // }
 
         // Request the user's location when a button is clicked
-        document.getElementById("getLocationButton").addEventListener("click", function() {
+        // document.getElementById("getLocationButton").addEventListener("click", function() {
         
-           checkRequest = !checkRequest
+        //    checkRequest = !checkRequest
           
-        });
+        // });
 
         
-            if(checkRequest){
-                setInterval(() => {
+        //     if(checkRequest){
+        //         setInterval(() => {
                 
-                    if ("geolocation" in navigator) {
-                        // Request the user's location
-                     navigator.geolocation.getCurrentPosition(function(position) {
-                        // Handle the location data here
-                        var latitude = position.coords.latitude;
-                        var longitude = position.coords.longitude;
+        //             if ("geolocation" in navigator) {
+        //                 // Request the user's location
+        //              navigator.geolocation.getCurrentPosition(function(position) {
+        //                 // Handle the location data here
+        //                 var latitude = position.coords.latitude;
+        //                 var longitude = position.coords.longitude;
                         
 
-                        markerFunction(longitude, latitude);
-                        alert(longitude, latitude);
+        //                 markerFunction(longitude, latitude);
+        //                 alert(longitude, latitude);
 
-                            // new tt.services.reverseGeocode({
-                            //         key: 'GZ2CohvCdB2RplDFGwFCyCg8gWO0YSKQ',
-                            //         position: `${longitude}, ${latitude}`,
-                            //         language: 'en-GB'
-                            // }).then((response)=>{
-                            //     // searchBox.start.setValue(`${response.addresses.address[0].localName}`)
-                            //     console.log(response.addresses.address[0].localName)
-                            // }) 
+        //                     // new tt.services.reverseGeocode({
+        //                     //         key: 'GZ2CohvCdB2RplDFGwFCyCg8gWO0YSKQ',
+        //                     //         position: `${longitude}, ${latitude}`,
+        //                     //         language: 'en-GB'
+        //                     // }).then((response)=>{
+        //                     //     // searchBox.start.setValue(`${response.addresses.address[0].localName}`)
+        //                     //     console.log(response.addresses.address[0].localName)
+        //                     // }) 
 
 
-                        // Use the latitude and longitude for location-based tasks
-                     }, function(error) {
-                        // Handle any errors here
-                            console.error("Error getting location:", error.message);
-                        }
-                    );
-                    } else {
-                        // Geolocation is not supported in this environment
-                        console.error("Geolocation is not available.");
-                    }
+        //                 // Use the latitude and longitude for location-based tasks
+        //              }, function(error) {
+        //                 // Handle any errors here
+        //                     console.error("Error getting location:", error.message);
+        //                 }
+        //             );
+        //             } else {
+        //                 // Geolocation is not supported in this environment
+        //                 console.error("Geolocation is not available.");
+        //             }
                 
-                }, 30000);
-            }
+        //         }, 30000);
+        //     }
 
             
                 
@@ -374,6 +378,10 @@
                 if(  menuPanel.classList.contains('active-menu-panel')){
                     menuPanel.classList.remove('active-menu-panel')
                 } 
+                const colorCodePanel = document.querySelector('.color-code-Panel')
+                if(!colorCodePanel.classList.contains('color-remove')){
+                    colorCodePanel.classList.add('color-remove')
+                }
             })
 
             document.querySelector('.stepBox-close').addEventListener('click', ()=>{
@@ -388,6 +396,10 @@
                 if(!menuPanel.classList.contains('active-menu-panel')){
                     menuPanel.classList.add('active-menu-panel')
                 } 
+                const colorCodePanel = document.querySelector('.color-code-Panel')
+                if(colorCodePanel.classList.contains('color-remove')){
+                    colorCodePanel.classList.remove('color-remove')
+                }
             })
 
         // window.addEventListener('resize', ()=>{

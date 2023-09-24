@@ -233,7 +233,7 @@ p{
   font-size: 20px;
 }
 
-.fa-solid{
+.menu-icon{
   color: #fafafa;
   font-size: 20px;
 }
@@ -313,15 +313,22 @@ select:hover{
   display: flex;
   flex-direction: column;
   justify-content: center;
-  padding: 22px;
-  padding-top: 50px;
+  align-items: center;
+  padding: 10px;
+  padding-top: 40px;
   z-index: 4;
   gap: 50px;
-  background-color: white;
+  background-color: rgba(0, 0, 0, 0.4);
+  box-shadow: 0 4px 24px 0 rgba(0, 0, 0, .16);
   height: fit-content;
   position: absolute;
   left: 10px;
-  top: 50%;
+  top: 30%;
+  visibility: visible;
+  border-radius: 5px;
+}
+.color-remove{
+  visibility: hidden;
 }
 .close-color-code-panel{
   display: flex;
@@ -330,6 +337,7 @@ select:hover{
   top: 5px;
   cursor: pointer;
   font-size: 15px;
+  
 }
 
 #code-close-icon{
@@ -337,7 +345,7 @@ select:hover{
   cursor: pointer;
 }
 .fast-traffic{
-  background-color: #2b4b41;
+  background-color: #06aa3d;
   width: 5px;
   height: 25px;
 }
@@ -350,6 +358,11 @@ select:hover{
   background-color: #cc2b02;
   width: 5px;
   height: 25px;
+}
+
+img{
+ width: 25px;
+ height: 25px;
 }
 
 .route-view-layers{
@@ -505,6 +518,9 @@ select:hover{
     flex-direction: column;
     width: 80%;
     padding: 10px;
+  }
+  .color-code-Panel{
+    top: 20%;
   }
 }
 
