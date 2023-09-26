@@ -62,7 +62,7 @@
     <form id="hide" class='tt-side-panel js-form'>
         <header class='tt-side-panel__header'>
             <div class='input-wrapper'>
-                <div id="getLocationButton" class="get-location"><i class="fa-solid fa-location-crosshairs" style="color: #2b4b41;"></i></div>
+                <div id="getLocationButton" class="get-location"><i class="fa-solid fa-location-crosshairs" style="color: #2b4b41;"></i>tap icon to access your location</div>
                 <!-- <div class='tt-icon icon-spacing -start'></div> -->
                 <div id='startSearchBox' class='tt-form-label searchbox'></div>
             </div>
@@ -208,68 +208,77 @@
 
     <script>
 
+            var routeMarkers = {}, routePoints = {}, searchBox = {};
+            var distance;
+            var time;
 
-        // if(!navigator.geolocation) {
-        //         console.log("Your browser doesn't support geolocation feature!")
-        //     } else {
-                
-        //             navigator.geolocation.getCurrentPosition(getPosition)
-               
-        //     }
+      
 
 
-        // var checkRequest = true
-        // function markerFunction(lng, lat){
-        //  var marker = new tt.Marker()
-        //         .setLngLat([lng, lat])
-        //         .addTo(map);
-        // }
+        var checkRequest = false
+        function markerFunction(lng, lat){
+         var marker = new tt.Marker()
+                .setLngLat([lng, lat])
+                .addTo(map);
+        }
 
         // Request the user's location when a button is clicked
-        // document.getElementById("getLocationButton").addEventListener("click", function() {
+        document.getElementById("getLocationButton").addEventListener("click", function() {
         
-        //    checkRequest = !checkRequest
-          
-        // });
+           checkRequest = !checkRequest
+           
+           if(checkRequest){
+                // setInterval(() => {}, 30000);
+                    // if(!navigator.geolocation) {
+                    //     console.log("Your browser doesn't support geolocation feature!")
+                    // } else {
+                        
+                    //     navigator.geolocation.getCurrentPosition(getPosition)
+                    
+                    // }
+                    
+                    if ("geolocation" in navigator) {
+                        // Request the user's location
 
-        
-        //     if(checkRequest){
-        //         setInterval(() => {
-                
-        //             if ("geolocation" in navigator) {
-        //                 // Request the user's location
-        //              navigator.geolocation.getCurrentPosition(function(position) {
-        //                 // Handle the location data here
-        //                 var latitude = position.coords.latitude;
-        //                 var longitude = position.coords.longitude;
+                     navigator.geolocation.getCurrentPosition(function(position) {
+                        // Handle the location data here
+                        var latitude = position.coords.latitude;
+                        var longitude = position.coords.longitude;
                         
 
-        //                 markerFunction(longitude, latitude);
-        //                 alert(longitude, latitude);
+                       
+                       
 
-        //                     // new tt.services.reverseGeocode({
-        //                     //         key: 'GZ2CohvCdB2RplDFGwFCyCg8gWO0YSKQ',
-        //                     //         position: `${longitude}, ${latitude}`,
-        //                     //         language: 'en-GB'
-        //                     // }).then((response)=>{
-        //                     //     // searchBox.start.setValue(`${response.addresses.address[0].localName}`)
-        //                     //     console.log(response.addresses.address[0].localName)
-        //                     // }) 
+                            new tt.services.reverseGeocode({
+                                    key: 'GZ2CohvCdB2RplDFGwFCyCg8gWO0YSKQ',
+                                    position: `${longitude}, ${latitude}`,
+                                    language: 'en-GB'
+                            }).then( (response)=>{
+                                console.log(response)
+                                
+                                searchBox.start.setValue(`${response.addresses[0].address.freeformAddress}`);
+                                onResultSelected(response.addresses[0], 'start');
+
+                            }) 
 
 
-        //                 // Use the latitude and longitude for location-based tasks
-        //              }, function(error) {
-        //                 // Handle any errors here
-        //                     console.error("Error getting location:", error.message);
-        //                 }
-        //             );
-        //             } else {
-        //                 // Geolocation is not supported in this environment
-        //                 console.error("Geolocation is not available.");
-        //             }
+                        // Use the latitude and longitude for location-based tasks
+                     }, function(error) {
+                        // Handle any errors here
+                            console.error("Error getting location:", error.message);
+                        }
+                    );
+                    } else {
+                        // Geolocation is not supported in this environment
+                        console.error("Geolocation is not available.");
+                    }
                 
-        //         }, 30000);
-        //     }
+                
+            }
+        });
+
+        
+          
 
             
                 
@@ -562,10 +571,7 @@
             var loadingHint = new InfoHint('info', 'bottom-center').addTo(document.getElementById('map'));
             var resultsManager = new ResultsManager();
 
-            var routeMarkers = {}, routePoints = {}, searchBox = {};
-            var distance;
-            var time;
-
+           
 
             // const FullscreenControl = new tt.FullscreenControl({container: document.querySelector('body')})
             // const navigationControl = new tt.NavigationControl({})
@@ -605,38 +611,6 @@
             
 
             
-
-                // var geolocateControl = new tt.GeolocateControl({
-                //     positionOptions: {
-                //         enableHighAccuracy: true
-                //     },
-                //     fitBoundsOptions:{maxZoom:0},
-                //     showAccuracyCircle: false,
-                //     showUserLocation: false,
-                //     trackUserLocation: true
-                // });
-
-                // geolocateControl.on('geolocate', function(event) {
-                //        const lng= event.coords.longitude
-                //        const lat= event.coords.latitude
-
-                //             new tt.services.reverseGeocode({
-                //             key: 'GZ2CohvCdB2RplDFGwFCyCg8gWO0YSKQ',
-                //             position: `${lng}, ${lat}`,
-                //             language: 'en-GB'
-                //         }).then((response)=>{
-                //             getLocation(response)
-                //         })
-
-                //         function getLocation(response){
-                            
-                            
-                //             const location = document.querySelector('.get-location')
-                //             location.addEventListener('click', () => {
-                //                 searchBox.start.setValue(`${response.addresses.address[0].localName}`)
-                //             })
-                //         }
-                // });
 
             
             
@@ -713,6 +687,7 @@
 
                 searchBox.on('tomtom.searchbox.resultselected', function(event) {
                     if (event.data && event.data.result) {
+                        console.log(event)
                         onResultSelected(event.data.result, type);
                     }
                 });
@@ -784,10 +759,10 @@
 
             function handleCalculateRouteResponse(response, type) {
                 var geojson = response.toGeoJson();
-                console.log(geojson);
-                var feature = geojson.features[0];
-                var coordinates = feature.geometry.coordinates;
-                var guidance = feature.properties.guidance;
+                var features = geojson.features;
+                console.log(features);
+                var coordinates = features[0].geometry.coordinates;
+                var guidance = features[0].properties.guidance;
 
                 clearMap();
                 resultsManager.success()
@@ -801,18 +776,22 @@
                 guidancePanel.bindEvents();
                 
                 var routeColors = ['#4a90e2', '#666666', '#666666']
+                features.forEach(function(feature, index){
                     map.addLayer({
-                        'id': 'route' ,
+                        'id': 'route' + index ,
                         'type': 'line',
                         'source': {
                             'type': 'geojson',
-                            'data': geojson
+                            'data':feature
                         },
                         'paint': {
-                            'line-color': routeColors[0],
+                            'line-color': routeColors[index],
                             'line-width': 6
                         }
                     });
+
+                })
+                    
                
                 var bounds = new tt.LngLatBounds();
                 var point = {
@@ -896,6 +875,7 @@
                     zoom: 15,
                     locations: routePoints.start.join() + ':' + routePoints.finish.join(),
                     travelMode: travelMode,
+                   
                 });
             }
 
@@ -1204,6 +1184,10 @@ const routeBtn = document.getElementById('route-direction');
     <script>
         introJs().setOptions({
   steps: [{
+    title: 'Welcome 👋, Enjoy Your Journey',
+    intro: 'And Stay Safe!!'
+  },
+  {
     title: 'Welcome 👋, Enjoy Your Journey',
     intro: 'And Stay Safe!!'
   },
